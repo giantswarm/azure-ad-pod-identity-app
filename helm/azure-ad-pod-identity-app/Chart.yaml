@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 1.6.1
+description: Deploy components for the azure-ad-pod-identity-app
+name: azure-ad-pod-identity-app
+namespace: kube-system
+version: [[ .Version ]]
+home: https://github.com/giantswarm/azure-ad-pod-identity-app
+sources:
+  - https://github.com/Azure/aad-pod-identity
+  - https://github.com/giantswarm/azure-ad-pod-identity-app

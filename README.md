@@ -1,10 +1,10 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/{APP-NAME}-app.svg?style=shield)](https://circleci.com/gh/giantswarm/{APP-NAME}-app)
+[![CircleCI](https://circleci.com/gh/giantswarm/azure-ad-pod-identity-app.svg?style=shield)](https://circleci.com/gh/giantswarm/azure-ad-pod-identity-app)
 
-# {APP-NAME}-app chart
+# azure-ad-pod-identity-app chart
 
-Giant Swarm offers a {APP-NAME} Managed App which can be installed in tenant clusters.
-Here we define the {APP-NAME} chart with its templates and default configuration.
+Giant Swarm offers azure-ad-pod-identity Managed App which can be installed in tenant clusters.
+Here we define the azure-ad-pod-identity chart with its templates and default configuration.
 
 ## Credit
 
-* {APP HELM REPOSITORY}
+* https://github.com/Azure/aad-pod-identity

@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: nmi
+    tier: node
+  annotations:
+    description: {{ .Chart.Description }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
+      app.kubernetes.io/component: nmi
+  template:
+    metadata:
+      labels:
+        {{- include "aad-pod-identity.labels" . | nindent 8 }}
+        app.kubernetes.io/component: nmi
+        tier: node
+{{- if .Values.nmi.podAnnotations }}
+      annotations:
+{{ toYaml .Values.nmi.podAnnotations | indent 8 }}
+{{- end }}
+    spec:
+      {{- if .Values.rbac.enabled }}
+      serviceAccountName: {{ template "aad-pod-identity.nmi.fullname" . }}
+      {{- end }}
+      {{- if .Values.nmi.priorityClassName }}
+      priorityClassName: {{ .Values.nmi.priorityClassName | quote }}
+      {{- end }}
+      hostNetwork: true
+      volumes:
+      - hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+        name: iptableslock
+      containers:
+      - name: nmi
+        image: "{{ .Values.image.registry }}/{{ .Values.nmi.image.name }}:{{ .Values.nmi.image.tag }}"
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+        args:
+          - "--host-ip=$(HOST_IP)"
+          - "--node=$(NODE_NAME)"
+          - --MICNamespace={{ .Release.Namespace }}
+          {{- if .Values.nmi.probePort }}
+          - --http-probe-port={{ .Values.nmi.probePort }}
+          {{- end }}
+          {{- if .Values.nmi.ipTableUpdateTimeIntervalInSeconds }}
+          - --ipt-update-interval-sec={{ .Values.nmi.ipTableUpdateTimeIntervalInSeconds }}
+          {{- end }}
+          {{- if .Values.nmi.retryAttemptsForCreated }}
+          - --retry-attempts-for-created={{ .Values.nmi.retryAttemptsForCreated }}
+          {{- end }}
+          {{- if .Values.nmi.retryAttemptsForAssigned }}
+          - --retry-attempts-for-assigned={{ .Values.nmi.retryAttemptsForAssigned }}
+          {{- end }}
+          {{- if .Values.nmi.findIdentityRetryIntervalInSeconds }}
+          - --find-identity-retry-interval={{ .Values.nmi.findIdentityRetryIntervalInSeconds }}
+          {{- end }}
+          {{- if .Values.nmi.enableScaleFeatures }}
+          - --enableScaleFeatures={{ .Values.nmi.enableScaleFeatures }}
+          {{- end }}
+          {{- if .Values.nmi.prometheusPort }}
+          - --prometheus-port={{ .Values.nmi.prometheusPort }}
+          {{- end }}
+          {{- if .Values.nmi.blockInstanceMetadata }}
+          - --block-instance-metadata={{ .Values.nmi.blockInstanceMetadata }}
+          {{- end }}
+          {{- if .Values.nmi.metadataHeaderRequired}}
+          - --metadata-header-required={{ .Values.nmi.metadataHeaderRequired }}
+          {{- end }}
+          - --operation-mode={{ .Values.operationMode }}
+          {{- if eq .Values.operationMode "managed" }}
+          - --forceNamespaced
+          {{- end }}
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          {{- if eq .Values.operationMode "standard" }}
+          - name: FORCENAMESPACED
+            value: "{{ .Values.forceNameSpaced }}"
+          {{- end }}
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - mountPath: /run/xtables.lock
+          name: iptableslock
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            {{- if .Values.nmi.probePort }}
+            port: {{ .Values.nmi.probePort }}
+            {{- else }}
+            port: 8080
+            {{- end }}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+{{- with .Values.nmi.resources }}
+        resources:
+{{ toYaml . | indent 12 }}
+{{- end }}
+{{- with .Values.nmi.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.nmi.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.nmi.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}
