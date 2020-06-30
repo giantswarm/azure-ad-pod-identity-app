@@ -36,9 +36,6 @@ spec:
         image: "{{ .Values.image.registry }}/{{ .Values.mic.image.name }}:{{ .Values.mic.image.tag }}"
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         args:
-          {{- if not .Values.adminsecret }}
-          - "--cloudconfig={{ .Values.mic.cloudConfig }}"
-          {{- end }}
           - "--logtostderr"
           {{- if .Values.mic.logVerbosity }}
           - -v={{ .Values.mic.logVerbosity }}
@@ -80,7 +77,6 @@ spec:
                 fieldPath: metadata.namespace
           - name: FORCENAMESPACED
             value: "{{ .Values.forceNameSpaced }}"
-          {{- if .Values.adminsecret }}
           - name: CLOUD
             valueFrom:
               secretKeyRef:
@@ -116,16 +112,6 @@ spec:
               secretKeyRef:
                 key: ClientSecret
                 name: {{ template "aad-pod-identity.mic.fullname" . }}
-          {{- end }}
-        volumeMounts:
-          - name: certificates
-            mountPath: /etc/kubernetes/certs
-            readOnly: true
-          {{- if not .Values.adminsecret }}
-          - name: k8s-azure-file
-            mountPath: {{ .Values.mic.cloudConfig }}
-            readOnly: true
-          {{- end }}
         livenessProbe:
           httpGet:
             path: /healthz
@@ -140,15 +126,6 @@ spec:
         resources:
 {{ toYaml . | indent 12 }}
 {{- end }}
-      volumes:
-      - name: certificates
-        hostPath:
-          path: /etc/kubernetes/certs
-      {{- if not .Values.adminsecret }}
-      - name: k8s-azure-file
-        hostPath:
-          path: {{ .Values.mic.cloudConfig }}
-      {{- end }}
 {{- with .Values.mic.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

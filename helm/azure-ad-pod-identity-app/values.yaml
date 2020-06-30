@@ -12,7 +12,8 @@ image:
 # https://github.com/Azure/aad-pod-identity#4-optional-match-pods-in-the-namespace
 # By default, AAD Pod Identity matches pods to identities across namespaces.
 # To match only pods in the namespace containing AzureIdentity set this to true.
-forceNameSpaced: "false"
+forceNameSpaced: false
+
 
 # When NMI runs on a node where MIC is running, then MIC token request call is also
 # intercepted by NMI. MIC can't get a valid token as to initialize and then
@@ -23,7 +24,15 @@ installMICException: "true"
 
 ## If using a separate service principal for aad-pod-identity instead of cluster service principal specify the following
 ## (The chart will perform the base64 encoding for you for values that are stored in secrets.)
-adminsecret: {}
+adminsecret:
+  cloud: ""
+  subscriptionID: ""
+  resourceGroup: ""
+  vmType: "vmss"
+  tenantID: ""
+  clientID: ""
+  clientSecret: ""
+
 #   cloud: <cloud environment name>
 #   subscriptionID: <subscription id>
 #   resourceGroup: <cluster resource group>
@@ -82,8 +91,8 @@ mic:
   # Override the defult value of immutable identities.
   immutableUserMSIs: []
     # Example of MSIs (should be replaced with the real client ids)
-    #- "00000000-0000-0000-0000-000000000000"
-    #- "11111111-1111-1111-1111-111111111111"
+    # - "00000000-0000-0000-0000-000000000000"
+    # - "11111111-1111-1111-1111-111111111111"
 
   # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#batch-create-delete-flag
   # default value is 20
@@ -97,9 +106,6 @@ mic:
   # prometheus port for metrics
   prometheusPort: ""
 
-  # cloud configuration used to authenticate with Azure
-  cloudConfig: "/etc/kubernetes/azure.json"
-
   # The maximum retry of UpdateUserMSI call. MIC updates all the identities in a batch. If a single identity contains an error
   # or is invalid, then the entire operation fails. Configuring this flag will make MIC retry by removing the erroneous identities
   # returned in the error
@@ -111,8 +117,8 @@ mic:
   updateUserMSIRetryInterval: ""
 
 nmi:
-  image: 
-    name: nmi
+  image:
+    name: giantswarm/nmi
     tag: 1.6.1
 
   priorityClassName: ""

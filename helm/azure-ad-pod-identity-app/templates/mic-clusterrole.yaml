@@ -31,4 +31,8 @@ rules:
 - apiGroups: ["aadpodidentity.k8s.io"]
   resources: ["azureassignedidentities"]
   verbs: ["*"]
+- apiGroups: ["policy"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["{{ template "aad-pod-identity.mic.fullname" .}}"]
+  verbs: ["use"]
 {{- end }}
