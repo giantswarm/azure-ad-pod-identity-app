@@ -7,6 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [v0.2.0]
+
+### Added
+
+- Exposing prometheus services for scrapping.
+- Basic documentation to explain what the application does.
+
 
 ## [v0.1.0]
 
@@ -14,5 +21,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/fluent-logshipping-app/compare/v0.1.0...master
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.2.0...master
+[v0.2.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/releases/tag/v0.2.0
 [v0.1.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/releases/tag/v0.1.0

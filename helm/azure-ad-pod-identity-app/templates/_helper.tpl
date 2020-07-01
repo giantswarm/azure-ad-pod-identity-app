@@ -53,5 +53,7 @@ Common labels.
 {{- define "aad-pod-identity.labels" -}}
 {{- include "aad-pod-identity.selectors" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/configuration-checksum: {{ toJson .Values | sha256sum | trunc 48 | quote }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ template "aad-pod-identity.chart" . }}
 {{- end -}}

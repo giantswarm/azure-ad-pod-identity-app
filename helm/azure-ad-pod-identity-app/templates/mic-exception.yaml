@@ -5,7 +5,6 @@ metadata:
   name: mic
 spec:
   podLabels:
-    app: mic
-    component: mic
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic
 {{- end }}

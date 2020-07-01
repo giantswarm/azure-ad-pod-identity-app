@@ -3,11 +3,13 @@ apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: {{ template "aad-pod-identity.mic.fullname" . }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mic
 spec:
   privileged: false
   allowPrivilegeEscalation: false
   volumes:
-    - 'configMap'
     - 'secret'
   hostNetwork: false
   hostIPC: false

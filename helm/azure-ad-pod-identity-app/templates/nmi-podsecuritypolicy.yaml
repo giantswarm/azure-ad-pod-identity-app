@@ -3,6 +3,9 @@ apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: nmi
 spec:
   allowPrivilegeEscalation: true
   privileged: true

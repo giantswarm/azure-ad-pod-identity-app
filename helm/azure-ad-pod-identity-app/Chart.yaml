@@ -6,5 +6,4 @@ namespace: kube-system
 version: [[ .Version ]]
 home: https://github.com/giantswarm/azure-ad-pod-identity-app
 sources:
-  - https://github.com/Azure/aad-pod-identity
-  - https://github.com/giantswarm/azure-ad-pod-identity-app
+  - https://raw.githubusercontent.com/giantswarm/azure-ad-pod-identity-app/v[[ .Version ]]/README.md
