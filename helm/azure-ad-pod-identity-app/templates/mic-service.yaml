@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "aad-pod-identity.mic.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    giantswarm.io/monitoring: "true"
+    giantswarm.io/monitoring-path: /metrics
+    giantswarm.io/monitoring-port: {{ .Values.mic.prometheusPort | quote }}
+    prometheus.io/scrape: "true"
+    prometheus.io/port: {{ .Values.mic.prometheusPort | quote }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mic
+spec:
+  selector:
+    {{- include "aad-pod-identity.selectors" . | nindent 4 }}
+    app.kubernetes.io/component: mic
+  clusterIP: "None"
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: {{ .Values.mic.prometheusPort }}
+      targetPort: {{ .Values.mic.prometheusPort }}

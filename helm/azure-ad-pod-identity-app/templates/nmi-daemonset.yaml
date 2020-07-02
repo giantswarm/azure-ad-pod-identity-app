@@ -6,7 +6,6 @@ metadata:
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: nmi
-    tier: node
   annotations:
     description: {{ .Chart.Description }}
 spec:
@@ -19,7 +18,6 @@ spec:
       labels:
         {{- include "aad-pod-identity.labels" . | nindent 8 }}
         app.kubernetes.io/component: nmi
-        tier: node
 {{- if .Values.nmi.podAnnotations }}
       annotations:
 {{ toYaml .Values.nmi.podAnnotations | indent 8 }}
@@ -32,6 +30,7 @@ spec:
       priorityClassName: {{ .Values.nmi.priorityClassName | quote }}
       {{- end }}
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       volumes:
       - hostPath:
           path: /run/xtables.lock

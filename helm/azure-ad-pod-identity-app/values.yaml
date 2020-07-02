@@ -2,11 +2,15 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# String to partially override aad-pod-identity.fullname template with a string (will prepend the release name)
 nameOverride: ""
+# String to fully override aad-pod-identity.fullname template with a string
 fullnameOverride: ""
 
 image:
+  # Image registry
   registry: quay.io
+  # Image pull policy
   imagePullPolicy: Always
 
 # https://github.com/Azure/aad-pod-identity#4-optional-match-pods-in-the-namespace
@@ -25,21 +29,20 @@ installMICException: "true"
 ## If using a separate service principal for aad-pod-identity instead of cluster service principal specify the following
 ## (The chart will perform the base64 encoding for you for values that are stored in secrets.)
 adminsecret:
+  # Azure cloud environment name. Should be one of: AzurePublicCloud, AzureUSGovernmentCloud, AzureChinaCloud, AzureGermanCloud
   cloud: ""
+  # Azure subscription ID where the cluster is located
   subscriptionID: ""
+  # Azure resource group of the cluster
   resourceGroup: ""
+  # vmType: <`standard` for normal virtual machine nodes, and `vmss` for cluster deployed with a virtual machine scale set>
   vmType: "vmss"
+  # Azure service principal tenantID
   tenantID: ""
+  # Azure service principal clientID
   clientID: ""
+  # Azure service principal clientSecret
   clientSecret: ""
-
-#   cloud: <cloud environment name>
-#   subscriptionID: <subscription id>
-#   resourceGroup: <cluster resource group>
-#   vmType: <`standard` for normal virtual machine nodes, and `vmss` for cluster deployed with a virtual machine scale set>
-#   tenantID: <service principal tenant id>
-#   clientID: <service principal client id>
-#   clientSecret: <service principal client secret>
 
 # Operation mode for pod-identity. Default is standard mode that has MIC doing identity assignment
 # Allowed values: "standard", "managed"
@@ -102,9 +105,8 @@ mic:
   # default value is 5
   clientQps: ""
 
-  # default value is 8888
-  # prometheus port for metrics
-  prometheusPort: ""
+  # prometheus port for metrics (default is 8888)
+  prometheusPort: "8888"
 
   # The maximum retry of UpdateUserMSI call. MIC updates all the identities in a batch. If a single identity contains an error
   # or is invalid, then the entire operation fails. Configuring this flag will make MIC retry by removing the erroneous identities
@@ -138,40 +140,38 @@ nmi:
   nodeSelector:
     kubernetes.io/os: linux
 
+  # List of node taints to tolerate
   tolerations: []
 
+  # Affinity settings
   affinity: {}
 
   # Override iptables update interval in seconds (default is 60)
-  ipTableUpdateTimeIntervalInSeconds: ""
+  ipTableUpdateTimeIntervalInSeconds: "60"
 
   # Override http liveliness probe port (default is 8080)
-  probePort: ""
+  probePort: "8080"
 
   # Override number of retries in NMI to find assigned identity in CREATED state (default is 16)
-  retryAttemptsForCreated: ""
+  retryAttemptsForCreated: "16"
 
   # Override number of retries in NMI to find assigned identity in ASSIGNED state (default is 4)
-  retryAttemptsForAssigned: ""
+  retryAttemptsForAssigned: "4"
 
   # Override retry interval to find assigned identities in seconds (default is 5)
-  findIdentityRetryIntervalInSeconds: ""
+  findIdentityRetryIntervalInSeconds: "5"
 
-  # Enable scale features - https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#enable-scale-features-flag
-  # Accepted values are true/false. Default is false.
-  enableScaleFeatures: ""
+  # Enable scale features - https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#enable-scale-features-flag (default is false)
+  enableScaleFeatures: "false"
 
-  # default value is 9090
-  # prometheus port for metrics
-  prometheusPort: ""
+  # prometheus port for metrics (default is 9090)
+  prometheusPort: "9090"
 
-  # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#block-instance-metadata-flag
-  # default is false
-  blockInstanceMetadata: ""
+  # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#block-instance-metadata-flag (default is false)
+  blockInstanceMetadata: "false"
 
-  # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#metadata-header-required-flag
-  # default is false
-  metadataHeaderRequired: ""
+  # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#metadata-header-required-flag (default is false)
+  metadataHeaderRequired: "false"
 
 rbac:
   enabled: true
