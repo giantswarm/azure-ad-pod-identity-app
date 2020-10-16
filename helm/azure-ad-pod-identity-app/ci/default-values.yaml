@@ -1,0 +1,16 @@
+---
+adminsecret:
+  # Azure cloud environment name. Should be one of: AzurePublicCloud, AzureUSGovernmentCloud, AzureChinaCloud, AzureGermanCloud
+  cloud: "AzurePublicCloud"
+  # Azure subscription ID where the cluster is located
+  subscriptionID: "12345"
+  # Azure resource group of the cluster
+  resourceGroup: "12345"
+  # vmType: <`standard` for normal virtual machine nodes, and `vmss` for cluster deployed with a virtual machine scale set>
+  vmType: "vmss"
+  # Azure service principal tenantID
+  tenantID: "12345"
+  # Azure service principal clientID
+  clientID: "12345"
+  # Azure service principal clientSecret
+  clientSecret: "12345"
