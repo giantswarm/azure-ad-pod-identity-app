@@ -7,4 +7,4 @@ version: [[ .Version ]]
 home: https://github.com/giantswarm/azure-ad-pod-identity-app
 sources:
   - https://raw.githubusercontent.com/giantswarm/azure-ad-pod-identity-app/v[[ .Version ]]/README.md
-icon: https://user-images.githubusercontent.com/273727/96254137-10c86d80-0fb5-11eb-9a55-f0d99c92f33c.png
+icon: https://s.giantswarm.io/app-icons/1/png/azure-ad-pod-identity-app-light.png
