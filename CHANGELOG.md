@@ -7,13 +7,16 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## Changed
+
+- Move giantswarm.io/monitoring annotation to label
+
 ## [v0.2.0]
 
 ### Added
 
 - Exposing prometheus services for scrapping.
 - Basic documentation to explain what the application does.
-
 
 ## [v0.1.0]
 
