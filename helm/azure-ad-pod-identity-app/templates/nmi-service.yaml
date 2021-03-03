@@ -4,7 +4,6 @@ metadata:
   name: {{ template "aad-pod-identity.nmi.fullname" . }}
   namespace: {{ $.Release.Namespace }}
   annotations:
-    giantswarm.io/monitoring: "true"
     giantswarm.io/monitoring-path: /metrics
     giantswarm.io/monitoring-port: {{ .Values.nmi.prometheusPort | quote }}
     prometheus.io/scrape: "true"
@@ -12,6 +11,7 @@ metadata:
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: nmi
+    giantswarm.io/monitoring: "true"
 spec:
   selector:
     {{- include "aad-pod-identity.selectors" . | nindent 4 }}
