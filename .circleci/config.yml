@@ -1,11 +1,13 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@2.1.0
+  architect: giantswarm/architect@2.2.0
 
 workflows:
   package-and-push-chart-on-tag:
     jobs:
       - architect/push-to-app-catalog:
+          context: "architect"
+          executor: "app-build-suite"
           name: "package and push azure-ad-pod-identity-app chart"
           app_catalog: "giantswarm-playground-catalog"
           app_catalog_test: "giantswarm-playground-test-catalog"
