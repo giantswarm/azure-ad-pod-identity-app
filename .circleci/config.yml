@@ -16,3 +16,14 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+      - architect/push-to-app-catalog:
+          context: "architect"
+          executor: "app-build-suite"
+          name: push-to-control-plane-app-catalog
+          app_catalog: "control-plane-test-catalog"
+          app_catalog_test: "control-plane-test-catalog"
+          chart: "azure-ad-pod-identity-app"
+          filters:
+            # Trigger the job also on git tag.
+            tags:
+              only: /^v.*/
