@@ -8,5 +8,4 @@ sources:
   - https://raw.githubusercontent.com/giantswarm/azure-ad-pod-identity-app/v[[ .Version ]]/README.md
 icon: https://s.giantswarm.io/app-icons/1/png/azure-ad-pod-identity-app-light.png
 restrictions:
-  fixedNamespace: kube-system
   compatibleProviders: ["azure"]
