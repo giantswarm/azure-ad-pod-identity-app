@@ -7,11 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-
-
-## Changed
+### Changed
 
 - Upgrade to 1.7.4
+
+## [v0.2.1]
+
+### Changed
 - Move giantswarm.io/monitoring annotation to label
 
 ## [v0.2.0]
@@ -27,6 +29,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.2.0...master
-[v0.2.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/releases/tag/v0.2.0
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.2.1...HEAD
+[v0.2.1]: https://github.com/giantswarm/prometheus-meta-operator/compare/v0.2.0...v0.2.1
+[v0.2.0]: https://github.com/giantswarm/prometheus-meta-operator/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/releases/tag/v0.1.0
