@@ -7,8 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+
+
 ## Changed
 
+- Upgrade to 1.7.4
 - Move giantswarm.io/monitoring annotation to label
 
 ## [v0.2.0]

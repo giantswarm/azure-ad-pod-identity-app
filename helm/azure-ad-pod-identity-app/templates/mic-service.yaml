@@ -1,3 +1,4 @@
+{{- if eq .Values.operationMode "standard" }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -22,3 +23,4 @@ spec:
       protocol: TCP
       port: {{ .Values.mic.prometheusPort }}
       targetPort: {{ .Values.mic.prometheusPort }}
+{{- end }}
