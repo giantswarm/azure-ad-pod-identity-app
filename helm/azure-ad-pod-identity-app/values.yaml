@@ -13,11 +13,14 @@ image:
   # Image pull policy
   imagePullPolicy: Always
 
+# One or more secrets to be used when pulling images
+# imagePullSecrets:
+#   - name: myRegistryKeySecretName
+
 # https://github.com/Azure/aad-pod-identity#4-optional-match-pods-in-the-namespace
 # By default, AAD Pod Identity matches pods to identities across namespaces.
 # To match only pods in the namespace containing AzureIdentity set this to true.
 forceNameSpaced: false
-
 
 # When NMI runs on a node where MIC is running, then MIC token request call is also
 # intercepted by NMI. MIC can't get a valid token as to initialize and then
@@ -28,22 +31,16 @@ installMICException: "true"
 
 ## If using a separate service principal for aad-pod-identity instead of cluster service principal specify the following
 ## (The chart will perform the base64 encoding for you for values that are stored in secrets.)
-adminsecret:
-  # Azure cloud environment name. Should be one of: AzurePublicCloud, AzureUSGovernmentCloud, AzureChinaCloud, AzureGermanCloud
-  cloud: ""
-  # Azure subscription ID where the cluster is located
-  subscriptionID: ""
-  # Azure resource group of the cluster
-  resourceGroup: ""
-  # vmType: <`standard` for normal virtual machine nodes, and `vmss` for cluster deployed with a virtual machine scale set>
-  vmType: "vmss"
-  # Azure service principal tenantID
-  tenantID: ""
-  # Azure service principal clientID
-  clientID: ""
-  # Azure service principal clientSecret
-  clientSecret: ""
-
+adminsecret: {}
+#   cloud: <cloud environment name>
+#   subscriptionID: <subscription id>
+#   resourceGroup: <node resource group>
+#   vmType: <`standard` for normal virtual machine nodes, and `vmss` for cluster deployed with a virtual machine scale set>
+#   tenantID: <service principal tenant id>
+#   clientID: <service principal client id. Set to `msi` when using a User Managed Identity>
+#   clientSecret: <service principal client secret. Set to `msi` when using a User Managed Identity>
+#   useMSI: <set to true when using a User Managed Identity>
+#   userAssignedMSIClientID: <client id for the User Managed Identity>
 # Operation mode for pod-identity. Default is standard mode that has MIC doing identity assignment
 # Allowed values: "standard", "managed"
 operationMode: "standard"
@@ -57,6 +54,7 @@ mic:
 
   # log level. Uses V logs (glog)
   logVerbosity: 0
+  loggingFormat: ""
 
   resources:
     limits:
@@ -77,9 +75,27 @@ mic:
 
   affinity: {}
 
+  # Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
+  # ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+  topologySpreadConstraints: []
+    # - maxSkew: 1
+    #   topologyKey: failure-domain.beta.kubernetes.io/zone
+    #   whenUnsatisfiable: DoNotSchedule
+    #   labelSelector:
+    #     matchLabels:
+    #       app.kubernetes.io/component: mic
+
+  # Limit the number of concurrent disruptions that your application experiences,
+  # allowing for higher availability while permitting the cluster administrator to manage the clusters nodes.
+  # ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+  podDisruptionBudget: {}
+    # minAvailable: 1
+
   leaderElection:
     # Override leader election instance name (default is 'hostname')
     instance: ""
+    # Override the namespace to create leader election objects (default is default namespace)
+    namespace: ""
     # Override leader election name (default is aad-pod-identity-mic)
     name: ""
     # Override leader election duration (default is 15s)
@@ -105,8 +121,12 @@ mic:
   # default value is 5
   clientQps: ""
 
-  # prometheus port for metrics (default is 8888)
+  # default value is 8888
+  # prometheus port for metrics
   prometheusPort: "8888"
+
+  # cloud configuration used to authenticate with Azure
+  cloudConfig: "/etc/kubernetes/azure.json"
 
   # The maximum retry of UpdateUserMSI call. MIC updates all the identities in a batch. If a single identity contains an error
   # or is invalid, then the entire operation fails. Configuring this flag will make MIC retry by removing the erroneous identities
@@ -118,12 +138,20 @@ mic:
   # Default value is 1s
   updateUserMSIRetryInterval: ""
 
+  # The interval between reconciling identity assignment on Azure based on an existing list of AzureAssignedIdentities
+  # Default value is 3m
+  identityAssignmentReconcileInterval: ""
+
 nmi:
   image:
     name: giantswarm/nmi
     tag: 1.7.4
 
   priorityClassName: ""
+
+  # log level. Uses V logs (klog)
+  logVerbosity: 0
+  loggingFormat: ""
 
   resources:
     limits:
@@ -134,6 +162,8 @@ nmi:
       memory: 256Mi
 
   podAnnotations: {}
+
+  podLabels: {}
 
   ## Node labels for pod assignment
   ## aad-pod-identity is currently only supported on linux
@@ -149,29 +179,40 @@ nmi:
   # Override iptables update interval in seconds (default is 60)
   ipTableUpdateTimeIntervalInSeconds: "60"
 
+  # Override mic namespace to short circuit MIC token requests (default is default namespace)
+  micNamespace: ""
+
   # Override http liveliness probe port (default is 8080)
-  probePort: "8080"
+  probePort: "8085"
 
   # Override number of retries in NMI to find assigned identity in CREATED state (default is 16)
-  retryAttemptsForCreated: "16"
+  retryAttemptsForCreated: ""
 
   # Override number of retries in NMI to find assigned identity in ASSIGNED state (default is 4)
-  retryAttemptsForAssigned: "4"
+  retryAttemptsForAssigned: ""
 
   # Override retry interval to find assigned identities in seconds (default is 5)
-  findIdentityRetryIntervalInSeconds: "5"
+  findIdentityRetryIntervalInSeconds: ""
 
   # Enable scale features - https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#enable-scale-features-flag (default is false)
-  enableScaleFeatures: "false"
+  enableScaleFeatures: ""
 
   # prometheus port for metrics (default is 9090)
   prometheusPort: "9090"
 
   # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#block-instance-metadata-flag (default is false)
-  blockInstanceMetadata: "false"
+  blockInstanceMetadata: ""
 
   # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#metadata-header-required-flag (default is false)
-  metadataHeaderRequired: "false"
+  metadataHeaderRequired: ""
+
+  # enable running aad-pod-identity on clusters with kubenet
+  # default is false
+  allowNetworkPluginKubenet: false
+
+  # Path to kubelet default config.
+  # default is /opt/bin/kubelet
+  kubeletConfig: "/opt/bin/kubelet"
 
 rbac:
   enabled: true
@@ -180,15 +221,25 @@ rbac:
   allowAccessToSecrets: true
 
 # Create azure identities and bindings
-azureIdentities: []
-  # - name: "azure-identity"
+# This is a map with the AzureIdentityName being the key and the rest of the blob as value in accordance
+# to helm best practices: https://helm.sh/docs/chart_best_practices/values/#consider-how-users-will-use-your-values
+azureIdentities:
+  # "azure-identity":
   #   # if not defined, then the azure identity will be deployed in the same namespace as the chart
   #   namespace: ""
-  #   # type 0: MSI, type 1: Service Principal
+  #   # type 0: User-assigned identity, type 1: Service Principal, type 2: Service principal with certificate
   #   type: 0
   #   # /subscriptions/subscription-id/resourcegroups/resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name
+  #   # Required for type 0
   #   resourceID: ""
+  #   # Required for type 0, 1 and 2
   #   clientID: ""
+  #   # Required for type 1 and 2
+  #   tenantID: ""
+  #   # Required for type 1 and 2
+  #   clientPassword: "{\"name\":\"<secret name>\",\"namespace\":\"<secret namespace>\"}"
+  #   # Optional for type 1 and 2 (multi-tenant)
+  #   auxiliaryTenantIDs: []
   #   binding:
   #     name: "azure-identity-binding"
   #     # The selector will also need to be included in labels for app deployment
@@ -196,3 +247,7 @@ azureIdentities: []
 
 # If true, install necessary custom resources.
 installCRDs: false
+
+# If provided, the userAgent string will be appended to the pod identity user agents for all
+# ADAL, ARM and Kube API server requests.
+customUserAgent: ""
