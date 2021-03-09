@@ -118,12 +118,6 @@ spec:
         - name: FORCENAMESPACED
           value: "{{ .Values.forceNamespaced }}"
         {{- end }}
-        {{- if .Values.nmi.prometheusPort }}
-        ports:
-        - containerPort: {{ .Values.nmi.prometheusPort }}
-          name: metrics
-          protocol: TCP
-        {{- end }}
         securityContext:
           runAsUser: 0
           capabilities:

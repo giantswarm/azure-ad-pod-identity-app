@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix PSP capabilities to allow it to work on management clusters
+
 ## [0.4.0] - 2021-03-09
 
 ### Changed

@@ -1,0 +1,13 @@
+{{- if .Values.mic.podDisruptionBudget }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "aad-pod-identity.mic.fullname" . }}-pdb
+  namespace: {{ .Release.Namespace }}
+spec:
+  minAvailable: {{ .Values.mic.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: mic
+      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
+{{- end }}
