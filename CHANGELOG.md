@@ -9,6 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Update chart to 3.0.3
 - Allow more configuration options to work by default with CAPZ (Cluster API Provider Azure)
 
 ## [0.3.0] - 2021-03-09
