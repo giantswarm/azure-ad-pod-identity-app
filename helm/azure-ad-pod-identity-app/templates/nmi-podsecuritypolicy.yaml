@@ -10,13 +10,18 @@ spec:
   allowPrivilegeEscalation: true
   privileged: true
   allowedCapabilities:
-    - "NET_ADMIN"
+    - DAC_READ_SEARCH
+    - NET_ADMIN
+    - NET_RAW
   volumes:
     - 'configMap'
     - 'secret'
     - 'hostPath'
   allowedHostPaths:
     - pathPrefix: "/run/xtables.lock"
+    - pathPrefix: "{{ .Values.nmi.kubeletConfig }}"
+  requiredDropCapabilities:
+  - ALL
   hostNetwork: true
   hostIPC: false
   hostPID: false
