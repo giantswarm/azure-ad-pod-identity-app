@@ -17,7 +17,7 @@ The following table lists the configurable parameters of the azure-ad-pod-identi
 | `adminsecret.clientID`           | Azure service principal clientID    | ` `  |
 | `adminsecret.clientSecret`       | Azure service principal clientSecret| ` `  |
 | `mic.image.name`                 | MIC image name              | `mic`|
-| `mic.image.tag`                  | MIC image tag               | `1.6.1`      |
+| `mic.image.tag`                  | MIC image tag               | `1.7.4`      |
 | `mic.priorityClassName`          | MIC priority class |      |
 | `mic.logVerbosity`               | Log level. Uses V logs (glog)       | `0`  |
 | `mic.resources`                  | Resource limit for MIC      | `{}` |
@@ -33,7 +33,7 @@ The following table lists the configurable parameters of the azure-ad-pod-identi
 | `mic.updateUserMSIMaxRetry`      | The maximum retry of UpdateUserMSI call in case of assignment errors | `2` |
 | `mic.updateUserMSIRetryInterval` | The duration to wait before retrying UpdateUserMSI (batch assigning/un-assigning identity from VM/VMSS) in case of errors | `1s` |
 | `nmi.image.name`                 | NMI image name | `nmi` |
-| `nmi.image.tag`                  | NMI image tag | `1.6.1` |
+| `nmi.image.tag`                  | NMI image tag | `1.7.4` |
 | `nmi.priorityClassName`          | NMI priority class | |
 | `nmi.resources`                  | Resource limit for NMI | `{}` |
 | `nmi.podAnnotations`             | Pod annotations for NMI | `{}` |
