@@ -48,7 +48,7 @@ operationMode: "standard"
 mic:
   image:
     name: giantswarm/mic
-    tag: 1.7.4
+    tag: v1.7.4
 
   priorityClassName: ""
 
@@ -145,7 +145,7 @@ mic:
 nmi:
   image:
     name: giantswarm/nmi
-    tag: 1.7.4
+    tag: v1.7.4
 
   priorityClassName: ""
 

@@ -7,7 +7,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-## [0.4.2] - 2021-03-09
+### Fixed
+
+- Fix missing 'v' in tags
 
 ## [0.4.1] - 2021-03-09
 
@@ -46,8 +48,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.2...HEAD
-[0.4.2]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.1...v0.4.2
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.1...HEAD
 [0.4.1]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.2.1...v0.3.0
