@@ -18,7 +18,6 @@ image:
 # To match only pods in the namespace containing AzureIdentity set this to true.
 forceNameSpaced: false
 
-
 # When NMI runs on a node where MIC is running, then MIC token request call is also
 # intercepted by NMI. MIC can't get a valid token as to initialize and then
 # assign the identity. Installing an exception for MIC would ensure all token requests
@@ -47,6 +46,9 @@ adminsecret:
 # Operation mode for pod-identity. Default is standard mode that has MIC doing identity assignment
 # Allowed values: "standard", "managed"
 operationMode: "standard"
+
+kubelet:
+  path: /opt/bin/kubelet
 
 mic:
   image:

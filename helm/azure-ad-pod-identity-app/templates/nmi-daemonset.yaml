@@ -1,14 +1,16 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ template "aad-pod-identity.nmi.fullname" . }}
-  namespace: {{ $.Release.Namespace }}
+  annotations:
+    description: {{ .Chart.Description }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: nmi
-  annotations:
-    description: {{ .Chart.Description }}
+  name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
 spec:
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       {{- include "aad-pod-identity.selectors" . | nindent 6 }}
@@ -26,16 +28,19 @@ spec:
       {{- if .Values.rbac.enabled }}
       serviceAccountName: {{ template "aad-pod-identity.nmi.fullname" . }}
       {{- end }}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       {{- if .Values.nmi.priorityClassName }}
       priorityClassName: {{ .Values.nmi.priorityClassName | quote }}
       {{- end }}
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       volumes:
-      - hostPath:
+      - name: iptableslock
+        hostPath:
           path: /run/xtables.lock
-          type: FileOrCreate
-        name: iptableslock
+          type: FileOrCreate 
+      - name: kubelet-config
+        hostPath:
+          path: {{ .Values.kubelet.path }}
       containers:
       - name: nmi
         image: "{{ .Values.image.registry }}/{{ .Values.nmi.image.name }}:{{ .Values.nmi.image.tag }}"
@@ -43,9 +48,12 @@ spec:
         args:
           - "--host-ip=$(HOST_IP)"
           - "--node=$(NODE_NAME)"
+          - --http-probe-port={{ .Values.nmi.probePort | default 8080 }}
+          - --operation-mode={{ .Values.operationMode }}
+          {{- if eq .Values.operationMode "managed" }}
+          - --forceNamespaced
+          {{- else }}
           - --MICNamespace={{ .Release.Namespace }}
-          {{- if .Values.nmi.probePort }}
-          - --http-probe-port={{ .Values.nmi.probePort }}
           {{- end }}
           {{- if .Values.nmi.ipTableUpdateTimeIntervalInSeconds }}
           - --ipt-update-interval-sec={{ .Values.nmi.ipTableUpdateTimeIntervalInSeconds }}
@@ -71,10 +79,6 @@ spec:
           {{- if .Values.nmi.metadataHeaderRequired}}
           - --metadata-header-required={{ .Values.nmi.metadataHeaderRequired }}
           {{- end }}
-          - --operation-mode={{ .Values.operationMode }}
-          {{- if eq .Values.operationMode "managed" }}
-          - --forceNamespaced
-          {{- end }}
         env:
           - name: HOST_IP
             valueFrom:
@@ -84,26 +88,27 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
-          {{- if eq .Values.operationMode "standard" }}
           - name: FORCENAMESPACED
+            {{- if eq .Values.operationMode "managed" }}
+            value: "true"  
+            {{- else }}
             value: "{{ .Values.forceNameSpaced }}"
-          {{- end }}
+            {{- end }}
         securityContext:
           privileged: true
           capabilities:
             add:
             - NET_ADMIN
         volumeMounts:
-        - mountPath: /run/xtables.lock
-          name: iptableslock
+        - name: iptableslock
+          mountPath: /run/xtables.lock
+        - name: kubelet-config
+          mountPath: {{ .Values.kubelet.path }}
+          readOnly: true  
         livenessProbe:
           httpGet:
             path: /healthz
-            {{- if .Values.nmi.probePort }}
-            port: {{ .Values.nmi.probePort }}
-            {{- else }}
-            port: 8080
-            {{- end }}
+            port: {{ .Values.nmi.probePort | default 8080 }}
           initialDelaySeconds: 10
           periodSeconds: 5
 {{- with .Values.nmi.resources }}
