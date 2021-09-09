@@ -9,7 +9,7 @@ metadata:
 spec:
   privileged: false
   allowedHostPaths:
-    - pathPrefix: {{ .Values.mic.cloudConfig }}
+    - pathPrefix: /etc/kubernetes
       readOnly: true
   allowPrivilegeEscalation: false
   volumes:
