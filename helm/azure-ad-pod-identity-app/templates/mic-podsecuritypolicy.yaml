@@ -13,6 +13,7 @@ spec:
       readOnly: true
   allowPrivilegeEscalation: false
   volumes:
+    - 'emptyDir'
     - 'hostPath'
     - 'secret'
   hostNetwork: false
