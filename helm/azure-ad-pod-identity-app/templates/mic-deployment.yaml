@@ -181,7 +181,7 @@ spec:
         {{- if not .Values.adminsecret }}
         volumeMounts:
           - name: config
-            mountPath: /config/azure.yaml
+            mountPath: /config
             readOnly: true
         {{- end }}
         livenessProbe:
