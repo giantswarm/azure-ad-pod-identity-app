@@ -126,7 +126,7 @@ mic:
   prometheusPort: "8888"
 
   # cloud configuration used to authenticate with Azure
-  cloudConfig: "/etc/kubernetes/azure.json"
+  cloudConfig: "/etc/kubernetes/config/azure.yaml"
 
   # The maximum retry of UpdateUserMSI call. MIC updates all the identities in a batch. If a single identity contains an error
   # or is invalid, then the entire operation fails. Configuring this flag will make MIC retry by removing the erroneous identities
