@@ -8,3 +8,8 @@ checks:
     - "required-label-owner"
     - "unset-cpu-requirements"
     - "unset-memory-requirements"
+    - "writable-host-mount"
+    - "no-anti-affinity"
+    - "run-as-non-root"
+    - "host-network"
+    - "drop-net-raw-capability"
