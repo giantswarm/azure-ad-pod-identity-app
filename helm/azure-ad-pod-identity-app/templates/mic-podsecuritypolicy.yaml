@@ -8,6 +8,9 @@ metadata:
     app.kubernetes.io/component: mic
 spec:
   privileged: false
+  allowedHostPaths:
+    - pathPrefix: {{ .Values.mic.cloudConfig }}
+      readOnly: true
   allowPrivilegeEscalation: false
   volumes:
     - 'secret'
