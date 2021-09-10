@@ -1,9 +1,15 @@
 checks:
   addAllBuiltIn: true
   exclude:
-  - "drop-net-raw-capability"
-  - "unset-memory-requirements"
-  - "privileged-container"
-  - "no-anti-affinity"
-  - "no-read-only-root-fs"
-  - "run-as-non-root"
+    - "no-liveness-probe"
+    - "no-read-only-root-fs"
+    - "no-readiness-probe"
+    - "required-annotation-email"
+    - "required-label-owner"
+    - "unset-cpu-requirements"
+    - "unset-memory-requirements"
+    - "writable-host-mount"
+    - "no-anti-affinity"
+    - "run-as-non-root"
+    - "host-network"
+    - "drop-net-raw-capability"
