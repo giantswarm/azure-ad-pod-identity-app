@@ -8,8 +8,13 @@ metadata:
     app.kubernetes.io/component: mic
 spec:
   privileged: false
+  allowedHostPaths:
+    - pathPrefix: /etc/kubernetes
+      readOnly: true
   allowPrivilegeEscalation: false
   volumes:
+    - 'emptyDir'
+    - 'hostPath'
     - 'secret'
   hostNetwork: false
   hostIPC: false

@@ -48,7 +48,7 @@ operationMode: "standard"
 mic:
   image:
     name: giantswarm/mic
-    tag: v1.7.4
+    tag: v1.8.3
 
   priorityClassName: ""
 
@@ -125,9 +125,6 @@ mic:
   # prometheus port for metrics
   prometheusPort: "8888"
 
-  # cloud configuration used to authenticate with Azure
-  cloudConfig: "/etc/kubernetes/azure.json"
-
   # The maximum retry of UpdateUserMSI call. MIC updates all the identities in a batch. If a single identity contains an error
   # or is invalid, then the entire operation fails. Configuring this flag will make MIC retry by removing the erroneous identities
   # returned in the error
@@ -145,7 +142,7 @@ mic:
 nmi:
   image:
     name: giantswarm/nmi
-    tag: v1.7.4
+    tag: v1.8.3
 
   priorityClassName: ""
 
