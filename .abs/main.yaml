@@ -2,4 +2,4 @@ replace-chart-version-with-git: true
 generate-metadata: true
 chart-dir: ./helm/azure-ad-pod-identity-app
 destination: ./build
-skip-steps: [test_validate, test_all]
+skip-steps: [validate, all]
