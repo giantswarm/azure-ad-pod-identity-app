@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.7.0] - 2021-10-07
+
 ### Added
 
 - Added required annotation for new config system.
@@ -61,7 +63,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.0...v0.4.1
