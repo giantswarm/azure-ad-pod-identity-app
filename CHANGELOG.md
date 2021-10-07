@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Added required annotation for new config system.
 
+### Changed
+
+- Use right values from config system.
+
 ## [0.6.0] - 2021-09-10
 
 ### Changed

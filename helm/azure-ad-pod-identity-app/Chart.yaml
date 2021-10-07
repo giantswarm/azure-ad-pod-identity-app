@@ -11,4 +11,4 @@ restrictions:
   compatibleProviders: ["azure"]
 annotations:
   application.giantswarm.io/team: "celestial"
-  config.giantswarm.io/version: 1.x.x
+  config.giantswarm.io/version: change-operation-mode
