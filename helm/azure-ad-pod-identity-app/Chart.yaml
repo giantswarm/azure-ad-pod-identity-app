@@ -10,5 +10,5 @@ icon: https://s.giantswarm.io/app-icons/1/png/azure-ad-pod-identity-app-light.pn
 restrictions:
   compatibleProviders: ["azure"]
 annotations:
-  application.giantswarm.io/team: "celestial"
+  application.giantswarm.io/team: "phoenix"
   config.giantswarm.io/version: 1.x.x
