@@ -1,0 +1,17 @@
+{{- range $exception := .Values.exceptions }}
+{{- if and (gt (len $exception.namespaces) 0) (gt (len (keys $exception.podLabels)) 0) }}
+{{- range $exception.namespaces }}
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzurePodIdentityException
+metadata:
+  name: ad-id-exc-{{ . }}
+  namespace: {{ . }}
+spec:
+  podLabels:
+    {{- range $k, $v := $exception.podLabels }}
+    {{ $k }}: {{ $v | quote }}
+    {{- end }}
+---
+{{- end }}
+{{- end }}
+{{- end }}

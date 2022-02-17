@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Added new `exceptions` field in values.yaml to allow creating `AzurePodIdentityException` CRs.
+
 ## [0.7.0] - 2021-10-07
 
 ### Added
