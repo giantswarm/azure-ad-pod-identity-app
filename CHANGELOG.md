@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.8.0] - 2022-02-17
+
 ### Added
 
 - Added new `exceptions` field in values.yaml to allow creating `AzurePodIdentityException` CRs.
@@ -67,7 +69,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/giantswarm/giantswarm/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.4.1...v0.5.0
