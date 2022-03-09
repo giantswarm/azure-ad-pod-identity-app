@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Reduce NMI CPU request from 100m to 50m.
+
 ## [0.8.0] - 2022-02-17
 
 ### Added
