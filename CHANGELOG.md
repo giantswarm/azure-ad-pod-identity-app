@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Add HPA configuration for MIC deployment.
+- Add VPA configuration for NMI daemonset.
+
 ## [0.8.1] - 2022-03-10
 
 ### Changed

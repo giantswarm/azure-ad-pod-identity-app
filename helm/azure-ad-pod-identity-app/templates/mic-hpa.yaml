@@ -1,0 +1,32 @@
+{{ if .Capabilities.APIVersions.Has "autoscaling.k8s.io/v1" }}
+{{- if .Values.mic.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "aad-pod-identity.mic.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mic
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ template "aad-pod-identity.mic.fullname" . }}
+  minReplicas: {{ .Values.mic.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.mic.autoscaling.maxReplicas }}
+  metrics:
+    {{- with .Values.mic.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ . }}
+    {{- end }}
+    {{- with .Values.mic.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ . }}
+    {{- end }}
+{{- end }}
+{{- end }}
