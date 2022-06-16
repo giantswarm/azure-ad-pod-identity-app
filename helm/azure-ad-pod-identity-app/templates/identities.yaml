@@ -7,7 +7,7 @@ items:
     kind: AzureIdentity
     metadata:
       name: {{ .name }}
-      namespace: {{ include "resource.default.namespace" . }}
+      namespace: {{ $.Release.Namespace }}
       labels:
         {{- include "aad-pod-identity.labels" $ | nindent 8 }}
     spec:
@@ -18,7 +18,7 @@ items:
     kind: AzureIdentityBinding
     metadata:
       name: {{ .binding.name }}
-      namespace: {{ include "resource.default.namespace" . }}
+      namespace: {{ $.Release.Namespace }}
       labels:
         {{- include "aad-pod-identity.labels" $ | nindent 8 }}
     spec:
