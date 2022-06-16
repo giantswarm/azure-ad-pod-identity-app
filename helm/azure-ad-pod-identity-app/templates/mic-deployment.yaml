@@ -3,14 +3,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "aad-pod-identity.mic.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "resource.default.namespace" . }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic
   annotations:
     description: {{ .Chart.Description }}
 spec:
-  replicas: 2
+  replicas: 3
+  stategy:
+    type: "RollingUpdate"
   selector:
     matchLabels:
       {{- include "aad-pod-identity.selectors" . | nindent 6 }}
