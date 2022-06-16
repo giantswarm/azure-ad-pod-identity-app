@@ -4,7 +4,7 @@ metadata:
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
   name: {{ include "aad-pod-identity.name" . }}
-  namespace: {{ include "resource.default.namespace" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   egress:
   - {}
