@@ -12,7 +12,7 @@ spec:
   - ports:
     - port: {{ .Values.mic.probePort }}
       protocol: TCP
-    - port:{{ .Values.mic.prometheusPort }}
+    - port: {{ .Values.mic.prometheusPort }}
       protocol: TCP
   podSelector:
     matchLabels:
