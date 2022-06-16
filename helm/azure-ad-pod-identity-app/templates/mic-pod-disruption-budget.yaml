@@ -3,7 +3,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: {{ template "aad-pod-identity.mic.fullname" . }}-pdb
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "resource.default.namespace" . }}
 spec:
   minAvailable: {{ .Values.mic.podDisruptionBudget.minAvailable }}
   selector:

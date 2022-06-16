@@ -4,7 +4,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ template "aad-pod-identity.mic.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "resource.default.namespace" . }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic
