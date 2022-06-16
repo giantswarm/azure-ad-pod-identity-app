@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+  name: {{ include "aad-pod-identity.name" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  egress:
+  - {}
+  ingress:
+  - ports:
+    - port: {{ .Values.mic.probePort }}
+      protocol: TCP
+    - port: {{ .Values.mic.prometheusPort }}
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      {{- include "aad-pod-identity.selectors" . | nindent 4 }}
+  policyTypes:
+  - Egress
+  - Ingress

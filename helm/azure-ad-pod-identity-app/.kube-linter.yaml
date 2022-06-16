@@ -1,6 +1,7 @@
 checks:
   addAllBuiltIn: true
   exclude:
+    - "use-namespace"
     - "no-liveness-probe"
     - "no-read-only-root-fs"
     - "no-readiness-probe"
