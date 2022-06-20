@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Update `apiextensions.k8s.io/v1beta1` to `apiextensions.k8s.io/v1`
+- Update `apiextensions.k8s.io/v1beta1` to `apiextensions.k8s.io/v1` for CRDs in helm chart.
 
 ## [0.10.1] - 2022-06-15
 
