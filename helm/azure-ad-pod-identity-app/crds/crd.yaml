@@ -11,9 +11,30 @@ metadata:
 spec:
   group: aadpodidentity.k8s.io
   versions:
-    - name: v1
-      served: true
-      stored: true
+  - name: v1beta1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  - name: v1
+    served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  conversion:
+    strategy: None
   names:
     kind: AzureAssignedIdentity
     plural: azureassignedidentities
@@ -32,9 +53,30 @@ metadata:
 spec:
   group: aadpodidentity.k8s.io
   versions:
-    - name: v1
-      served: true
-      stored: true
+  - name: v1beta1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  - name: v1
+    served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  conversion:
+    strategy: None
   names:
     kind: AzureIdentityBinding
     plural: azureidentitybindings
@@ -53,9 +95,30 @@ metadata:
 spec:
   group: aadpodidentity.k8s.io
   versions:
-    - name: v1
-      served: true
-      stored: true
+  - name: v1beta1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  - name: v1
+    served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  conversion:
+    strategy: None
   names:
     kind: AzureIdentity
     singular: azureidentity
@@ -75,9 +138,30 @@ metadata:
 spec:
   group: aadpodidentity.k8s.io
   versions:
-    - name: v1
-      served: true
-      stored: true
+  - name: v1beta1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  - name: v1
+    served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          host:
+            type: string
+          port:
+            type: string
+  conversion:
+    strategy: None
   names:
     kind: AzurePodIdentityException
     singular: azurepodidentityexception
