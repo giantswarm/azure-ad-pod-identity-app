@@ -10,7 +10,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   group: aadpodidentity.k8s.io
-  version: v1
+  versions:
+    - name: v1
+      served: true
+      stored: true
   names:
     kind: AzureAssignedIdentity
     plural: azureassignedidentities
@@ -28,7 +31,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   group: aadpodidentity.k8s.io
-  version: v1
+  versions:
+    - name: v1
+      served: true
+      stored: true
   names:
     kind: AzureIdentityBinding
     plural: azureidentitybindings
@@ -46,7 +52,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   group: aadpodidentity.k8s.io
-  version: v1
+  versions:
+    - name: v1
+      served: true
+      stored: true
   names:
     kind: AzureIdentity
     singular: azureidentity
@@ -65,7 +74,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   group: aadpodidentity.k8s.io
-  version: v1
+  versions:
+    - name: v1
+      served: true
+      stored: true
   names:
     kind: AzurePodIdentityException
     singular: azurepodidentityexception
