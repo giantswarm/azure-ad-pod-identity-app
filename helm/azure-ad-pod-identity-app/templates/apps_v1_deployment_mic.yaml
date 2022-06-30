@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.giantswarm.io/branch: '{{ .Values.project.branch }}'
+    app.giantswarm.io/commit: '{{ .Values.project.commit }}'
+    app.kubernetes.io/instance: '{{ .Release.Name }}'
+    app.kubernetes.io/managed-by: '{{ .Release.Service }}'
+    app.kubernetes.io/name: '{{ .Chart.Name }}'
+    app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
+    component: mic
+    helm.sh/chart: '{{ .Chart.Name }}'
+    k8s-app: aad-pod-id
+  name: mic
+  namespace: '{{ .Release.Namespace }}'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mic
+      component: mic
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mic
+        component: mic
+    spec:
+      containers:
+      - args:
+        - --cloudconfig=/etc/kubernetes/azure.json
+        - --logtostderr
+        env:
+        - name: MIC_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: '{{ .Values.image.registry }}/{{ .Values.mic.image.name }}:{{ .Values.mic.image.tag}}'
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        name: mic
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /etc/kubernetes/azure.json
+          name: k8s-azure-file
+          readOnly: true
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - if [ -f /etc/kubernetes/config/azure.yaml ]; then cp /etc/kubernetes/config/azure.yaml
+          /config/azure.yaml; else cat /etc/kubernetes/azure.json | python3 -c 'import
+          sys, yaml, json; print(yaml.dump(json.loads(sys.stdin.read())))' > /config/azure.yaml;
+          fi
+        image: '{{ .Values.image.registry }}/giantswarm/alpine:3.12-python3'
+        name: copy-azure-config-file
+        volumeMounts:
+        - mountPath: /etc/kubernetes
+          name: etc-kubernetes
+          readOnly: true
+        - mountPath: /config
+          name: config
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: aad-pod-id-mic-service-account
+      volumes:
+      - hostPath:
+          path: etc/kubernetes
+        name: etc-kubernetes
+      - emptyDir: {}
+        name: config
+      - hostPath:
+          path: /etc/kubernetes/azure.json
+        name: k8s-azure-file

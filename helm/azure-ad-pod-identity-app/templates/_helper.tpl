@@ -6,6 +6,15 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 59 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "aad-pod-identity-psp.mic.fullname" -}}
+{{- printf "%s-psp-mic" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
+{{- define "aad-pod-identity-psp.nmi.fullname" -}}
+{{- printf "%s-psp-nmi" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
+
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars (minus 4 for suffix) because some Kubernetes name fields are limited to this (by the DNS naming spec).

@@ -93,8 +93,8 @@ mic:
   # Limit the number of concurrent disruptions that your application experiences,
   # allowing for higher availability while permitting the cluster administrator to manage the clusters nodes.
   # ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
-  podDisruptionBudget: {}
-    # minAvailable: 1
+  podDisruptionBudget:
+    minAvailable: 2
 
   leaderElection:
     # Override leader election instance name (default is 'hostname')
@@ -260,3 +260,14 @@ exceptions: []
 #   - kube-system
 #   podLabels:
 #     ad-pod-identity: skip
+
+rbac:
+  enabled: true
+
+operationMode: "standard"
+
+crdInstall:
+  enable: true
+  kubectl:
+    image: "giantswarm/docker-kubectl"
+    tag: "1.23.3"

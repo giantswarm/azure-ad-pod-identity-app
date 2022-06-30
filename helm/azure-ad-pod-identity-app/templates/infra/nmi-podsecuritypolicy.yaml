@@ -2,7 +2,11 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  name: {{ include "aad.crdInstall" . }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-6"
+    {{- include "aad.CRDInstallAnnotations" . | nindent 4 }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: nmi
@@ -41,3 +45,4 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 {{- end }}
+
