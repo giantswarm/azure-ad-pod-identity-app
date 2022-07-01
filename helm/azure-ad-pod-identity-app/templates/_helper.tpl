@@ -66,8 +66,9 @@ app.kubernetes.io/configuration-checksum: {{ toJson .Values | sha256sum | trunc 
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ template "aad-pod-identity.chart" . }}
 {{- end -}}
+
 {{- define "aad.crdInstall" -}}
-{{- printf "%s-%s" ( include "name" . ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
+{{- printf "%s-%s" ( include "aad-pod-identity.name" . ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "aad.CRDInstallAnnotations" -}}
@@ -76,8 +77,8 @@ helm.sh/chart: {{ template "aad-pod-identity.chart" . }}
 {{- end -}}
 
 {{- define "aad.selectorLabels" -}}
-app.kubernetes.io/name: "{{ template "name" . }}"
-app.kubernetes.io/instance: "{{ template "name" . }}"
+app.kubernetes.io/name: "{{ template "aad-pod-identity.name" . }}"
+app.kubernetes.io/instance: "{{ template "aad-pod-identity.name" . }}"
 {{- end -}}
 
 {{/* Create a label which can be used to select any orphaned crd-install hook resources */}}
