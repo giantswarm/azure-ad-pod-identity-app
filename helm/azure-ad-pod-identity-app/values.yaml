@@ -271,3 +271,8 @@ crdInstall:
   kubectl:
     image: "giantswarm/docker-kubectl"
     tag: "1.23.3"
+
+
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
