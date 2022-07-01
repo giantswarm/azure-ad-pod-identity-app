@@ -25,6 +25,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/component: nmi
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
         component: nmi
         tier: node
     spec:

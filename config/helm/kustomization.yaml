@@ -14,6 +14,7 @@ images:
 
 transformers:
   - transformers/common-labels.yaml
+  - transformers/deployment-labels.yaml
 
 patchesStrategicMerge:
   - patches/nmi-daemonset.yaml

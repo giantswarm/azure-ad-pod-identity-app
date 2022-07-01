@@ -24,9 +24,10 @@ spec:
   template:
     metadata:
       labels:
-        /: '{{- include "aad-pod-identity.labels" . | nindent 8 }}'
         app: mic
         app.kubernetes.io/component: mic
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
         component: mic
     spec:
       containers:

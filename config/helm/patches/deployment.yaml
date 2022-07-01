@@ -42,12 +42,3 @@
   path: /metadata/labels
   value:
     app.kubernetes.io/component: mic
-- op: add
-  path: /spec/selector/matchLabels/app.kubernetes.io~1component
-  value: mic
-- op: add
-  path: /spec/template/metadata/labels/app.kubernetes.io~1component
-  value: mic
-- op: add
-  path: /spec/template/metadata/labels/~1
-  value: '{{- include "aad-pod-identity.labels" . | nindent 8 }}'
