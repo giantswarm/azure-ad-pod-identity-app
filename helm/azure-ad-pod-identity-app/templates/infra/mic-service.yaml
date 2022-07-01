@@ -15,8 +15,8 @@ metadata:
     giantswarm.io/monitoring: "true"
 spec:
   selector:
-    {{- include "aad-pod-identity.selectors" . | nindent 4 }}
     app.kubernetes.io/component: mic
+    {{- include "aad-pod-identity.selectors" . | nindent 4 }}
   clusterIP: "None"
   ports:
     - name: metrics

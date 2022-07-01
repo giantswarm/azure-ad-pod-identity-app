@@ -9,8 +9,9 @@ labels:
   app.kubernetes.io/managed-by: '{{ .Release.Service }}'
   app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
   helm.sh/chart: '{{ .Chart.Name }}'
-  app.kubernetes.io/name: '{{ .Chart.Name }}'
+  app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
   app.kubernetes.io/instance: '{{ .Release.Name }}'
+
 fieldSpecs:
   - path: metadata/labels
     create: true

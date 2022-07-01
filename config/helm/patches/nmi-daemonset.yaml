@@ -1,0 +1,17 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: nmi
+  name: nmi
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: nmi
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: nmi

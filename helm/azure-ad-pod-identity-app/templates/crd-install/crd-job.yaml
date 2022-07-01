@@ -64,5 +64,3 @@ spec:
 {{- end }}
       restartPolicy: Never
   backoffLimit: 4
-Footer
-x
