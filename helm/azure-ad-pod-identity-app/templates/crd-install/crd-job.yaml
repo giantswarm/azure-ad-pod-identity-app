@@ -19,7 +19,7 @@ spec:
         {{- include "aad.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "aad.crdInstall" . }}
-      securityContet:
+      securityContext:
         runAsUser: 65534
         runAsGroup: 65534
       tolerations:
