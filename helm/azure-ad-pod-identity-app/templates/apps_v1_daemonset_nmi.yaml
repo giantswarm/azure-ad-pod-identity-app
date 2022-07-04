@@ -45,7 +45,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: mcr.microsoft.com/oss/azure/aad-pod-identity/nmi:v1.8.9
+        image: '{{ .Values.image.registry }}/{{ .Values.nmi.image.name }}:{{ .Values.nmi.image.tag}}'
         livenessProbe:
           httpGet:
             path: /healthz

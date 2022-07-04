@@ -17,7 +17,6 @@ spec:
   selector:
     matchLabels:
       app: mic
-      app.kubernetes.io/component: mic
       component: mic
   strategy:
     type: RollingUpdate
@@ -25,7 +24,6 @@ spec:
     metadata:
       labels:
         app: mic
-        app.kubernetes.io/component: mic
         app.kubernetes.io/instance: '{{ .Release.Name }}'
         app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
         component: mic

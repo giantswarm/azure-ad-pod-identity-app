@@ -11,6 +11,9 @@ images:
   - name: mcr.microsoft.com/oss/azure/aad-pod-identity/mic:*
     newName: "{{ .Values.image.registry }}/{{ .Values.mic.image.name }}"
     newTag: "{{ .Values.mic.image.tag}}"
+  - name: mcr.microsoft.com/oss/azure/aad-pod-identity/nmi:*
+    newName: "{{ .Values.image.registry }}/{{ .Values.nmi.image.name }}"
+    newTag: "{{ .Values.nmi.image.tag}}"
 
 transformers:
   - transformers/common-labels.yaml

@@ -44,7 +44,7 @@ operationMode: "standard"
 mic:
   image:
     name: giantswarm/mic
-    tag: v1.8.3
+    tag: v1.8.9
 
   priorityClassName: ""
 
@@ -147,7 +147,7 @@ mic:
 nmi:
   image:
     name: giantswarm/nmi
-    tag: v1.8.3
+    tag: v1.8.9
 
   priorityClassName: "system-node-critical"
 
@@ -189,8 +189,7 @@ nmi:
 
   # Override number of retries in NMI to find assigned identity in CREATED state (default is 16)
   retryAttemptsForCreated: ""
-
-  # Override number of retries in NMI to find assigned identity in ASSIGNED state (default is 4)
+# Override number of retries in NMI to find assigned identity in ASSIGNED state (default is 4)
   retryAttemptsForAssigned: ""
 
   # Override retry interval to find assigned identities in seconds (default is 5)
@@ -247,8 +246,6 @@ azureIdentities:
   #     # The selector will also need to be included in labels for app deployment
   #     selector: "demo"
 
-# If true, install necessary custom resources.
-# installCRDs: false
 
 # If provided, the userAgent string will be appended to the pod identity user agents for all
 # ADAL, ARM and Kube API server requests.
