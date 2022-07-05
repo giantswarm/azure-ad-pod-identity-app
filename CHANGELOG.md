@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update `rbac.authorization.k8s.io/v1beta1` to `rbac.authorization.k8s.io/v1` for RBAC resources in helm chart.
+
 ## [0.10.2] - 2022-06-20
 
 ### Changed
