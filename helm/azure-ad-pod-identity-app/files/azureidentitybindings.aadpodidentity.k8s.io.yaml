@@ -5,8 +5,6 @@ metadata:
     api-approved.kubernetes.io: unapproved
     controller-gen.kubebuilder.io/version: v0.5.0
   labels:
-    app.giantswarm.io/branch: '{{ .Values.project.branch }}'
-    app.giantswarm.io/commit: '{{ .Values.project.commit }}'
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
     app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
