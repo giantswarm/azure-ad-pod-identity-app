@@ -14,3 +14,4 @@ checks:
     - "run-as-non-root"
     - "host-network"
     - "drop-net-raw-capability"
+    - "access-to-secrets"

@@ -16,7 +16,7 @@ spec:
       protocol: TCP
   podSelector:
     matchLabels:
-      {{- include "aad-pod-identity.selectors" . | nindent 4 }}
+      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
   policyTypes:
   - Egress
   - Ingress
