@@ -1,8 +1,7 @@
 resources: 
-  - aks-addon-exception.yaml
   - azureassignedidentities.aadpodidentity.k8s.io.yaml
   - azureidentities.aadpodidentity.k8s.io.yaml
   - azureidentitybindings.aadpodidentity.k8s.io.yaml
   - azurepodidentityexceptions.aadpodidentity.k8s.io.yaml
-  - kustomization.yaml
+  - aks-addon-exception.yaml
   - mic-exception.yaml

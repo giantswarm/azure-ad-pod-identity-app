@@ -24,8 +24,17 @@
   path: /spec/strategy
   value:
     type: RollingUpdate
-- op: remove
-  path: /spec/template/spec/containers/0/volumeMounts
+- op: replace
+  path: /spec/template/spec/containers/0/args
+  value:
+    - --cloudconfig=/config/azure.yaml
+    - --logtostderr
+- op: replace
+  path: /spec/template/spec/containers/0/volumeMounts/0
+  value:
+    mountPath: /config
+    name: config
+    readOnly: true
 - op: replace
   path: /spec/template/spec/volumes/0
   value:

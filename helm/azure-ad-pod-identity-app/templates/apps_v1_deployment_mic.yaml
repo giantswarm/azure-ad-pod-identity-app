@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - args:
-        - --cloudconfig=/etc/kubernetes/azure.json
+        - --cloudconfig=/config/azure.yaml
         - --logtostderr
         env:
         - name: MIC_POD_NAMESPACE
@@ -57,6 +57,10 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
           runAsUser: 0
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          readOnly: true
       initContainers:
       - command:
         - /bin/sh

@@ -2,7 +2,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template "aad-pod-identity.mic.fullname" . }}
+  name: {{ template "aad-pod-identity-psp.mic.fullname" . }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic

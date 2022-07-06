@@ -14,7 +14,12 @@ create_crd_kustomize_file() {
 
   echo "resources: " > kustomization.yaml
 
-  for crd_file in *.yaml; do
+  for crd_file in *.k8s.io.yaml; do
+    echo "$crd_file"
+    echo "  - $crd_file" >> kustomization.yaml
+  done
+
+  for crd_file in *exception.yaml; do
     echo "$crd_file"
     echo "  - $crd_file" >> kustomization.yaml
   done
