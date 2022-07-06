@@ -29,7 +29,7 @@
   value:
     name: etc-kubernetes
     hostPath:
-      path: etc/kubernetes
+      path: /etc/kubernetes
 - op: add
   path: /spec/template/spec/volumes/1
   value:

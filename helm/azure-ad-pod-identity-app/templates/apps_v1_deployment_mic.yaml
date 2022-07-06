@@ -82,7 +82,7 @@ spec:
       serviceAccountName: aad-pod-id-mic-service-account
       volumes:
       - hostPath:
-          path: etc/kubernetes
+          path: /etc/kubernetes
         name: etc-kubernetes
       - emptyDir: {}
         name: config
