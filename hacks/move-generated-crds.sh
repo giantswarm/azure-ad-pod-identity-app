@@ -16,7 +16,7 @@ move-crds() {
     mv ${HELM_TEMPLATES_DIR}/apiextensions.k8s.io_v1_customresourcedefinition_*.aadpodidentity.k8s.io.yaml "./$CRD_BASE_DIR/"
     mv ${HELM_TEMPLATES_DIR}/aadpodidentity.k8s.io_v1_azurepodidentityexception_*.yaml "./$CRD_BASE_DIR/"
 
-    cd "$CRD_BASE_DIR"
+    pushd "$CRD_BASE_DIR"
     for crd_file in apiextensions.k8s.io_v1_customresourcedefinition_*.aadpodidentity.k8s.io.yaml; do
         new_crd_file="$(echo "$crd_file" | cut -c50-)" # remove first 50 chars
         echo "$new_crd_file"
@@ -27,7 +27,8 @@ move-crds() {
         echo "$new_crd_file"
         mv "$crd_file" "$new_crd_file"
     done
-    cd ../../../../..
+
+    popd 
 }
 
 move-crds

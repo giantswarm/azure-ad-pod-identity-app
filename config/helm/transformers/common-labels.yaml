@@ -9,6 +9,7 @@ labels:
   helm.sh/chart: '{{ .Chart.Name }}'
   app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
   app.kubernetes.io/instance: '{{ .Release.Name }}'
+  application.giantswarm.io/team: "phoenix"
 
 fieldSpecs:
   - path: metadata/labels

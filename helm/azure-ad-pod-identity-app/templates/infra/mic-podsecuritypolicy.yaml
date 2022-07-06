@@ -1,4 +1,4 @@
-{{- if and (.Values.rbac.enabled) (eq .Values.operationMode "standard") }}
+{{- if .Values.rbac.enabled }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
