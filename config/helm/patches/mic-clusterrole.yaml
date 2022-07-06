@@ -4,3 +4,9 @@
 - op: replace
   path: /rules/7/verbs
   value: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- op: add
+  path: /rules/8/resourceNames
+  value: 
+    - '{{ template "aad-pod-identity-psp.mic.fullname" . }}'
+
+

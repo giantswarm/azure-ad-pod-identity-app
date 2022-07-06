@@ -83,6 +83,14 @@ rules:
   - update
   - patch
   - delete
+- apiGroups:
+  - policy
+  resourceNames:
+  - '{{ template "aad-pod-identity-psp.mic.fullname" . }}'
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
 spec:
   template:
     metadata:

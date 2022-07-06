@@ -260,6 +260,8 @@ exceptions: []
 
 rbac:
   enabled: true
+  pspEnabled: true
+  allowAccessToSecrets: true
 
 operationMode: "standard"
 

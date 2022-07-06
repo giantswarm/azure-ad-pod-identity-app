@@ -57,10 +57,6 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
           runAsUser: 0
-        volumeMounts:
-        - mountPath: /etc/kubernetes/azure.json
-          name: k8s-azure-file
-          readOnly: true
       initContainers:
       - command:
         - /bin/sh
@@ -86,6 +82,3 @@ spec:
         name: etc-kubernetes
       - emptyDir: {}
         name: config
-      - hostPath:
-          path: /etc/kubernetes/azure.json
-        name: k8s-azure-file

@@ -24,7 +24,9 @@
   path: /spec/strategy
   value:
     type: RollingUpdate
-- op: add
+- op: remove
+  path: /spec/template/spec/containers/0/volumeMounts
+- op: replace
   path: /spec/template/spec/volumes/0
   value:
     name: etc-kubernetes
