@@ -3,5 +3,4 @@ resources:
   - azureidentities.aadpodidentity.k8s.io.yaml
   - azureidentitybindings.aadpodidentity.k8s.io.yaml
   - azurepodidentityexceptions.aadpodidentity.k8s.io.yaml
-  - aks-addon-exception.yaml
   - mic-exception.yaml

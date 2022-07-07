@@ -21,6 +21,7 @@ transformers:
 
 patchesStrategicMerge:
   - patches/nmi-daemonset.yaml
+  - patches/delete-aks-exception.yaml
 
 patches:
 - path: patches/deployment.yaml
