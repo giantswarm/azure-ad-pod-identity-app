@@ -1,0 +1,52 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: '{{ .Release.Namespace }}'
+
+resources:
+  - input/deployment-rbac.yaml
+  - input/mic-exception.yaml
+
+images:
+  - name: mcr.microsoft.com/oss/azure/aad-pod-identity/mic:*
+    newName: "{{ .Values.image.registry }}/{{ .Values.mic.image.name }}"
+    newTag: "{{ .Values.mic.image.tag}}"
+  - name: mcr.microsoft.com/oss/azure/aad-pod-identity/nmi:*
+    newName: "{{ .Values.image.registry }}/{{ .Values.nmi.image.name }}"
+    newTag: "{{ .Values.nmi.image.tag}}"
+
+transformers:
+  - transformers/common-labels.yaml
+  - transformers/deployment-labels.yaml
+
+patchesStrategicMerge:
+  - patches/nmi-daemonset.yaml
+  - patches/nmi-daemonset-args.yaml
+  - patches/delete-aks-exception.yaml
+
+patches:
+- path: patches/deployment.yaml
+  target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: mic
+- path: patches/nmi-daemonset-name.yaml
+  target:
+    group: apps
+    version: v1
+    kind: DaemonSet
+    name: nmi
+- path: patches/mic-clusterrole.yaml
+  target:
+    group: rbac.authorization.k8s.io
+    version: v1
+    kind: ClusterRole
+    name: aad-pod-id-mic-role
+- path: patches/nmi-clusterrole.yaml
+  target:
+    group: rbac.authorization.k8s.io
+    version: v1
+    kind: ClusterRole
+    name: aad-pod-id-nmi-role
+

@@ -16,7 +16,8 @@ spec:
       protocol: TCP
   podSelector:
     matchLabels:
-      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
+      app.kubernetes.io/instance: '{{ .Release.Name }}'
+      app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
   policyTypes:
   - Egress
   - Ingress

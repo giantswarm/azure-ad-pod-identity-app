@@ -1,0 +1,64 @@
+- op: add
+  path: /spec/template/spec/initContainers
+  value:
+    - name: copy-azure-config-file
+      image: "{{ .Values.image.registry }}/giantswarm/alpine:3.12-python3"
+      command:
+        - /bin/sh
+        - -c
+        # GS clusters have the cloud config file in /etc/kubernetes/config/azure.yaml and we can use it as-is so we just copy it to the desired position.
+        # CAPZ clusters use a JSON file so we convert it to yaml and save it to the desired position
+        - if [ -f /etc/kubernetes/config/azure.yaml ];
+          then
+          cp /etc/kubernetes/config/azure.yaml /config/azure.yaml;
+          else
+          cat /etc/kubernetes/azure.json | python3 -c 'import sys, yaml, json; print(yaml.dump(json.loads(sys.stdin.read())))' > /config/azure.yaml;
+          fi
+      volumeMounts:
+        - mountPath: /etc/kubernetes
+          name: etc-kubernetes
+          readOnly: true
+        - mountPath: /config
+          name: config
+- op: add
+  path: /spec/strategy
+  value:
+    type: RollingUpdate
+- op: replace
+  path: /spec/template/spec/containers/0/args
+  value:
+    - --cloudconfig=/config/azure.yaml
+    - --logtostderr
+- op: replace
+  path: /spec/template/spec/containers/0/volumeMounts/0
+  value:
+    mountPath: /config
+    name: config
+    readOnly: true
+- op: replace
+  path: /spec/template/spec/volumes/0
+  value:
+    name: etc-kubernetes
+    hostPath:
+      path: /etc/kubernetes
+- op: add
+  path: /spec/template/spec/volumes/1
+  value:
+    name: config
+    emptyDir: {}
+- op: replace
+  path: /spec/replicas
+  value: 3
+- op: add
+  path: /metadata/labels
+  value:
+    app.kubernetes.io/component: mic
+- op: add
+  path: /spec/selector/matchLabels/app.kubernetes.io~1component
+  value: mic
+- op: add
+  path: /spec/template/metadata/labels/app.kubernetes.io~1component
+  value: mic
+- op: replace
+  path: /metadata/name
+  value: azure-ad-pod-identity-app-mic

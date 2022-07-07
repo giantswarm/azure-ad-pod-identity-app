@@ -6,6 +6,15 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 59 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "aad-pod-identity-psp.mic.fullname" -}}
+{{- printf "%s-psp-mic" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
+{{- define "aad-pod-identity-psp.nmi.fullname" -}}
+{{- printf "%s-psp-nmi" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
+
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars (minus 4 for suffix) because some Kubernetes name fields are limited to this (by the DNS naming spec).
@@ -56,4 +65,23 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/configuration-checksum: {{ toJson .Values | sha256sum | trunc 48 | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ template "aad-pod-identity.chart" . }}
+{{- end -}}
+
+{{- define "aad.crdInstall" -}}
+{{- printf "%s-%s" ( include "aad-pod-identity.name" . ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "aad.CRDInstallAnnotations" -}}
+"helm.sh/hook": "pre-install,pre-upgrade"
+"helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
+{{- end -}}
+
+{{- define "aad.selectorLabels" -}}
+app.kubernetes.io/name: "{{ template "aad-pod-identity.name" . }}"
+app.kubernetes.io/instance: "{{ template "aad-pod-identity.name" . }}"
+{{- end -}}
+
+{{/* Create a label which can be used to select any orphaned crd-install hook resources */}}
+{{- define "aad.CRDInstallSelector" -}}
+{{- printf "%s" "crd-install-hook" -}}
 {{- end -}}

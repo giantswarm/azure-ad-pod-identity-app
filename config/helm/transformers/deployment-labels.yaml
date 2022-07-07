@@ -1,0 +1,14 @@
+---
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: deployment-labels
+labels:
+  app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
+  app.kubernetes.io/instance: '{{ .Release.Name }}'
+  application.giantswarm.io/team: "phoenix"
+
+fieldSpecs:
+  - path: spec/template/metadata/labels
+    kind: Deployment
+    create: true

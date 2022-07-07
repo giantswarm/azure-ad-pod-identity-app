@@ -1,8 +1,8 @@
-{{- if and (.Values.rbac.enabled) (eq .Values.operationMode "standard") }}
+{{- if .Values.rbac.enabled }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template "aad-pod-identity.mic.fullname" . }}
+  name: {{ template "aad-pod-identity-psp.mic.fullname" . }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic
@@ -35,3 +35,4 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 {{- end }}
+
