@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update to `1.8.9`
+- Added use of `kustomize` to update files from upstream
+
 ## [0.10.4] - 2022-07-06
 
 - Update CRD resources in helm chart.
