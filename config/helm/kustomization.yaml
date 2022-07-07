@@ -28,6 +28,7 @@ patches:
     group: apps
     version: v1
     kind: Deployment
+    name: mic
 - path: patches/mic-clusterrole.yaml
   target:
     group: rbac.authorization.k8s.io

@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
     application.giantswarm.io/team: phoenix
     helm.sh/chart: '{{ .Chart.Name }}'
-  name: mic
+  name: azure-ad-pod-identity-app-mic
   namespace: '{{ .Release.Namespace }}'
 spec:
   replicas: 3
