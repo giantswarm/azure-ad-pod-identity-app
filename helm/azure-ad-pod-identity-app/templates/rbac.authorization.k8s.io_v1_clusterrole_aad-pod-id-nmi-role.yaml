@@ -49,3 +49,11 @@ rules:
   - get
   - list
   - watch
+- apiGroups:
+  - policy
+  resourceNames:
+  - '{{ template "aad-pod-identity.nmi.fullname" . }}'
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

@@ -18,3 +18,21 @@ spec:
         app.kubernetes.io/name: '{{ template "aad-pod-identity.name" . }}'
         app.kubernetes.io/instance: '{{ .Release.Name }}'
         application.giantswarm.io/team: "phoenix"
+    spec:
+      containers:
+        - name: nmi
+          volumeMounts:
+          - mountPath: /run/xtables.lock
+            name: iptableslock
+          - mountPath: /opt/bin/kubelet
+            name: kubelet-config
+            readOnly: true
+      volumes:
+      - hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+        name: iptableslock
+      - hostPath:
+          path: /opt/bin/kubelet
+          type: ""
+        name: kubelet-config

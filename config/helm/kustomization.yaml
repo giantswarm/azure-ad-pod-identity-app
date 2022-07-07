@@ -21,6 +21,7 @@ transformers:
 
 patchesStrategicMerge:
   - patches/nmi-daemonset.yaml
+  - patches/nmi-daemonset-args.yaml
   - patches/delete-aks-exception.yaml
 
 patches:
@@ -36,4 +37,10 @@ patches:
     version: v1
     kind: ClusterRole
     name: aad-pod-id-mic-role
+- path: patches/nmi-clusterrole.yaml
+  target:
+    group: rbac.authorization.k8s.io
+    version: v1
+    kind: ClusterRole
+    name: aad-pod-id-nmi-role
 

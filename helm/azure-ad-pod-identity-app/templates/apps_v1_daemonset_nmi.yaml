@@ -32,10 +32,12 @@ spec:
     spec:
       containers:
       - args:
-        - --node=$(NODE_NAME)
-        - --http-probe-port=8085
-        - --enableScaleFeatures=true
-        - --metadata-header-required=true
+        - --node=$(NODE_NAME - --http-probe-port=8085
+        - --ipt-update-interval-sec=60
+        - --prometheus-port=9090
+        - --operation-mode=managed
+        - --forceNamespaced
+        - --kubelet-config=/opt/bin/kubelet
         env:
         - name: HOST_IP
           valueFrom:
@@ -72,6 +74,9 @@ spec:
         volumeMounts:
         - mountPath: /run/xtables.lock
           name: iptableslock
+        - mountPath: /opt/bin/kubelet
+          name: kubelet-config
+          readOnly: true
         - mountPath: /etc/default/kubelet
           name: kubelet-config
           readOnly: true
@@ -86,8 +91,8 @@ spec:
           type: FileOrCreate
         name: iptableslock
       - hostPath:
-          path: /etc/default/kubelet
-          type: FileOrCreate
+          path: /opt/bin/kubelet
+          type: ""
         name: kubelet-config
   updateStrategy:
     type: RollingUpdate

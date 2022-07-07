@@ -1,0 +1,11 @@
+- op: add
+  path: /rules/5
+  value: 
+    apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+    resourceNames:
+      - '{{ template "aad-pod-identity.nmi.fullname" . }}'
