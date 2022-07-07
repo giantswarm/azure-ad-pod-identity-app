@@ -45,6 +45,16 @@ rules:
   - get
   - patch
   - list
+- apiGroups:
+  - aadpodidentity.k8s.io
+  resources:
+  - azurepodidentityexceptions
+  verbs:
+  - get
+  - list
+  - create
+  - delete
+  - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
