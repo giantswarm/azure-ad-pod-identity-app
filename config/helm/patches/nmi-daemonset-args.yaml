@@ -10,7 +10,8 @@ spec:
       containers:
         - name: nmi
           args:
-            - --node=$(NODE_NAME - --http-probe-port=8085
+            - --node=$(NODE_NAME)
+            - --http-probe-port=8085
             - --ipt-update-interval-sec=60
             - --prometheus-port=9090
             - --operation-mode=managed

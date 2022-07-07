@@ -31,6 +31,12 @@ patches:
     version: v1
     kind: Deployment
     name: mic
+- path: patches/nmi-daemonset-name.yaml
+  target:
+    group: apps
+    version: v1
+    kind: DaemonSet
+    name: nmi
 - path: patches/mic-clusterrole.yaml
   target:
     group: rbac.authorization.k8s.io
