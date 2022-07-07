@@ -10,4 +10,5 @@ labels:
 
 fieldSpecs:
   - path: spec/template/metadata/labels
+    kind: Deployment
     create: true
