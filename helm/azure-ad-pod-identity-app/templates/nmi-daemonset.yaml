@@ -79,9 +79,7 @@ spec:
           {{- if .Values.nmi.blockInstanceMetadata }}
           - --block-instance-metadata={{ .Values.nmi.blockInstanceMetadata }}
           {{- end }}
-          {{- if .Values.nmi.metadataHeaderRequired}}
           - --metadata-header-required={{ .Values.nmi.metadataHeaderRequired }}
-          {{- end }}
           {{- if .Values.nmi.loggingFormat }}
           - --log-format={{ .Values.nmi.loggingFormat }}
           {{- end}}
