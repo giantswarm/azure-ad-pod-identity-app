@@ -37,7 +37,7 @@ spec:
       - name: iptableslock
         hostPath:
           path: /run/xtables.lock
-          type: FileOrCreate 
+          type: FileOrCreate
       {{- if semverCompare ">= 1.7.0-0" .Values.nmi.image.tag }}
       - name: kubelet-config
         hostPath:
@@ -102,6 +102,9 @@ spec:
           {{- end }}
           {{- if .Values.customUserAgent }}
           - --custom-user-agent={{ .Values.customUserAgent }}
+          {{- end }}
+          {{- if .Values.nmi.listenAddress }}
+          - --nmi-listen-address={{ .Values.nmi.listenAddress }}
           {{- end }}
         env:
         {{- if semverCompare "<= 1.6.1-0" .Values.nmi.image.tag }}
