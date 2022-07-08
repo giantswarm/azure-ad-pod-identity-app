@@ -1,3 +1,4 @@
+{{- if eq .Values.operationMode "standard" }}
 {{ if .Capabilities.APIVersions.Has "autoscaling.k8s.io/v1" }}
 {{- if .Values.mic.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
@@ -28,5 +29,6 @@ spec:
         name: memory
         targetAverageUtilization: {{ . }}
     {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}

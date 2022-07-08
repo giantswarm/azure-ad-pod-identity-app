@@ -15,7 +15,7 @@ spec:
       mode: Auto
   targetRef:
     apiVersion: apps/v1
-    kind: Deployment
+    kind: DaemonSet
     name: {{ template "aad-pod-identity.nmi.fullname" . }}
   updatePolicy:
     updateMode: Auto
