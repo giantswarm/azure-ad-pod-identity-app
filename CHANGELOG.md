@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.11.0] - 2022-07-08
+
 ### Changed
 
 - Bump manifests and image to upstream version 1.8.10.
@@ -117,7 +119,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.4...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.4...v0.11.0
 [0.10.4]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.3...v0.10.4
 [0.10.3]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.2...v0.10.3
 [0.10.2]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.1...v0.10.2
