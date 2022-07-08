@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.12.0] - 2022-07-08
+
 ### Changed
 
 - Disable `metadataHeaderRequired` by default.
@@ -123,7 +125,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.4...v0.11.0
 [0.10.4]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.3...v0.10.4
 [0.10.3]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.2...v0.10.3
