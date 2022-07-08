@@ -7,6 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Bump manifests and image to upstream version 1.8.10.
+- Bind NMI pods to all interfaces.
+- Use correct apiVersion for PDB based on k8s version.
+- Avoid creating any MIC related resource if operatingMode is not `standard`.
+
 ## [0.10.4] - 2022-07-06
 
 - Update CRD resources in helm chart.
