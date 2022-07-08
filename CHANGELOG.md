@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Disable `metadataHeaderRequired` by default.
+
 ## [0.11.0] - 2022-07-08
 
 ### Changed
