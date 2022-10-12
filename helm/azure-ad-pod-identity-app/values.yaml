@@ -202,7 +202,7 @@ nmi:
   enableScaleFeatures: ""
 
   # prometheus port for metrics (default is 9090)
-  prometheusPort: "9090"
+  prometheusPort: "9091"
 
   # https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.featureflags.md#block-instance-metadata-flag (default is false)
   blockInstanceMetadata: ""

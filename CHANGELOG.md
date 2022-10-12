@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Change metrics port to 9091 to avoid conflict with Cilium.
+
 ## [0.12.0] - 2022-07-08
 
 ### Changed
