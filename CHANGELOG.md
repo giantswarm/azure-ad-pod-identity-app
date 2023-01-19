@@ -7,6 +7,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Bump to latest helm chart
+  - Change Chart version from `v1` to `v2`
+- Bump images to 1.8.14
+  - Many CVE fixes including 1 Critical and serveral HIGH ones
+  - 
+
 ## [0.13.0] - 2022-10-12
 
 ### Changed
