@@ -7,10 +7,11 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   podLabels:
-    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app: mic
+    component: mic
     app.kubernetes.io/component: mic
 ---
-{{- end }}
+{{- end}}
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzurePodIdentityException
 metadata:

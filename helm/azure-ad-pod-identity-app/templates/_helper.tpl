@@ -32,6 +32,14 @@ If release name contains chart name it will be used as a full name.
 {{- printf "%s-nmi" (include "aad-pod-identity.name" .) -}}
 {{- end }}
 
+{{- define "aad-pod-identity-psp.mic.fullname" -}}
+{{- printf "%s-psp-mic" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
+{{- define "aad-pod-identity-psp.nmi.fullname" -}}
+{{- printf "%s-psp-nmi" (include "aad-pod-identity.name" .) -}}
+{{- end }}
+
 {{/*
 Create chart name and version as used by the chart label.
 */}}
@@ -53,7 +61,5 @@ Common labels.
 {{- define "aad-pod-identity.labels" -}}
 {{- include "aad-pod-identity.selectors" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-app.kubernetes.io/configuration-checksum: {{ toJson .Values | sha256sum | trunc 48 | quote }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ template "aad-pod-identity.chart" . }}
 {{- end -}}

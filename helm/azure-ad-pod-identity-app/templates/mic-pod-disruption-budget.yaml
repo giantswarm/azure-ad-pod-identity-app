@@ -1,4 +1,3 @@
-{{- if eq .Values.operationMode "standard" }}
 {{- if .Values.mic.podDisruptionBudget }}
 {{- if semverCompare ">=1.21-0" .Capabilities.KubeVersion.Version }}
 apiVersion: policy/v1
@@ -7,13 +6,11 @@ apiVersion: policy/v1beta1
 {{- end }}
 kind: PodDisruptionBudget
 metadata:
-  name: {{ template "aad-pod-identity.mic.fullname" . }}-pdb
+  name: mic-pdb
   namespace: {{ .Release.Namespace }}
 spec:
   minAvailable: {{ .Values.mic.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
       app.kubernetes.io/component: mic
-      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
-{{- end }}
 {{- end }}

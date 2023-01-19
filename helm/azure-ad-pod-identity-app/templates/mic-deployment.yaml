@@ -10,9 +10,7 @@ metadata:
   annotations:
     description: {{ .Chart.Description }}
 spec:
-  replicas: 3
-  strategy:
-    type: "RollingUpdate"
+  replicas: {{ .Values.mic.replicas }}
   selector:
     matchLabels:
       {{- include "aad-pod-identity.selectors" . | nindent 6 }}
@@ -25,44 +23,29 @@ spec:
       {{- if .Values.mic.podLabels }}
       {{- toYaml .Values.mic.podLabels | nindent 8 }}
       {{- end }}
-{{- if .Values.mic.podAnnotations }}
       annotations:
-{{ toYaml .Values.mic.podAnnotations | indent 8 }}
-{{- end }}
+        checksum/config: {{ include (print $.Template.BasePath "/mic-secret.yaml") . | sha256sum }}
+        {{- if .Values.mic.podAnnotations }}
+        {{ toYaml .Values.mic.podAnnotations | nindent 8 }}
+        {{- end }}
     spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       {{- if .Values.rbac.enabled }}
       serviceAccountName: {{ template "aad-pod-identity.mic.fullname" . }}
       {{- end }}
       {{- if .Values.mic.priorityClassName }}
       priorityClassName: {{ .Values.mic.priorityClassName | quote }}
       {{- end }}
-      initContainers:
-        - name: copy-azure-config-file
-          image: {{ .Values.image.registry }}/giantswarm/alpine:3.12-python3
-          command:
-            - /bin/sh
-            - -c
-            # GS clusters have the cloud config file in /etc/kubernetes/config/azure.yaml and we can use it as-is so we just copy it to the desired position.
-            # CAPZ clusters use a JSON file so we convert it to yaml and save it to the desired position.
-            - if [ -f /etc/kubernetes/config/azure.yaml ];
-              then
-              cp /etc/kubernetes/config/azure.yaml /config/azure.yaml;
-              else
-              cat /etc/kubernetes/azure.json | python3 -c 'import sys, yaml, json; print(yaml.dump(json.loads(sys.stdin.read())))' > /config/azure.yaml;
-              fi
-          volumeMounts:
-            - mountPath: /etc/kubernetes
-              name: etc-kubernetes
-              readOnly: true
-            - mountPath: /config
-              name: config
       containers:
       - name: mic
-        image: "{{ .Values.image.registry }}/{{ .Values.mic.image.name }}:{{ .Values.mic.image.tag }}"
+        image: "{{ .Values.image.repository }}/{{ .Values.mic.image }}:{{ .Values.mic.tag }}"
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         args:
           {{- if not .Values.adminsecret }}
-          - "--cloudconfig=/config/azure.yaml"
+          - "--cloudconfig={{ .Values.mic.cloudConfig }}"
           {{- end }}
           - "--logtostderr"
           {{- if .Values.mic.loggingFormat }}
@@ -98,6 +81,9 @@ spec:
           {{- if .Values.mic.prometheusPort }}
           - --prometheus-port={{ .Values.mic.prometheusPort }}
           {{- end }}
+          {{- if.Values.mic.syncRetryDuration }}
+          - --syncRetryDuration={{ .Values.mic.syncRetryDuration }}
+          {{- end}}
           {{- if .Values.mic.updateUserMSIMaxRetry }}
           - --update-user-msi-max-retry={{ .Values.mic.updateUserMSIMaxRetry }}
           {{- end }}
@@ -110,10 +96,11 @@ spec:
           {{- if .Values.customUserAgent }}
           - --custom-user-agent={{ .Values.customUserAgent }}
           {{- end }}
-        {{- if not .Values.adminsecret }}
         securityContext:
+        {{- if not .Values.adminsecret }}
           runAsUser: 0
         {{- end }}
+          readOnlyRootFilesystem: true
         env:
           - name: MIC_POD_NAMESPACE
             valueFrom:
@@ -170,17 +157,28 @@ spec:
                 name: {{ template "aad-pod-identity.mic.fullname" . }}
           {{- end }}
           {{- end }}
+          {{- if .Values.mic.customCloud.enabled }}
+          - name: AZURE_ENVIRONMENT_FILEPATH
+            value: "{{ .Values.mic.customCloud.configPath }}"
+          {{- end }}
         {{- if .Values.mic.prometheusPort }}
         ports:
           - containerPort: {{ .Values.mic.prometheusPort }}
             name: metrics
             protocol: TCP
         {{- end }}
-        {{- if not .Values.adminsecret }}
+        {{- if or (not .Values.adminsecret) .Values.mic.customCloud.enabled }}
         volumeMounts:
-          - name: config
-            mountPath: /config
+          {{- if not .Values.adminsecret }}
+          - name: k8s-azure-file
+            mountPath: {{ .Values.mic.cloudConfig }}
             readOnly: true
+          {{- end }}
+          {{- if .Values.mic.customCloud.enabled }}
+          - name: custom-env-file
+            mountPath: {{ .Values.mic.customCloud.configPath }}
+            readOnly: true
+          {{- end }}
         {{- end }}
         livenessProbe:
           httpGet:
@@ -196,13 +194,18 @@ spec:
         resources:
 {{ toYaml . | indent 12 }}
 {{- end }}
-      {{- if not .Values.adminsecret }}
+      {{- if or (not .Values.adminsecret) .Values.mic.customCloud.enabled }}
       volumes:
-      - name: etc-kubernetes
+      {{- if not .Values.adminsecret }}
+      - name: k8s-azure-file
         hostPath:
-          path: /etc/kubernetes
-      - name: config
-        emptyDir: {}
+          path: {{ .Values.mic.cloudConfig }}
+      {{- end }}
+      {{- if .Values.mic.customCloud.enabled }}
+      - name: custom-env-file
+        hostPath:
+          path: {{ .Values.mic.customCloud.configPath }}
+      {{- end }}
       {{- end }}
 {{- with .Values.mic.nodeSelector }}
       nodeSelector:
