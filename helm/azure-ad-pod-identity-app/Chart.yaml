@@ -1,6 +1,6 @@
 apiVersion: v2
-description: Deploy components for aad-pod-identity
-name: aad-pod-identity
+description: Deploy components for the azure-ad-pod-identity-app
+name: azure-ad-pod-identity-app
 version: [[ .Version ]]
 appVersion: 1.8.14
 home: https://github.com/giantswarm/azure-ad-pod-identity-app
@@ -12,6 +12,3 @@ restrictions:
 annotations:
   application.giantswarm.io/team: "phoenix"
   config.giantswarm.io/version: 1.x.x
-maintainers:
-  - name: aramase
-    email: anish.ramasekar@gmail.com
