@@ -262,3 +262,5 @@ exceptions: []
 #   - kube-system
 #   podLabels:
 #     ad-pod-identity: skip
+
+provider: vintage

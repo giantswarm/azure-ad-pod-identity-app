@@ -1,3 +1,4 @@
+{{- if and .Values.provider (eq .Values.provider "capz") -}}
 apiVersion: cilium.io/v2
 kind: CiliumLocalRedirectPolicy
 metadata:
@@ -21,3 +22,4 @@ spec:
       toPorts:
       - port: "80"
         protocol: TCP
+{{- end }}
