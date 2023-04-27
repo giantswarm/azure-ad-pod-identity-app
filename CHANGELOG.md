@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Enable support for cilium `kube proxy replacement` by creating a Local Redirect policy to replace iptables rule
+
 ## [0.13.0] - 2022-10-12
 
 ### Changed
