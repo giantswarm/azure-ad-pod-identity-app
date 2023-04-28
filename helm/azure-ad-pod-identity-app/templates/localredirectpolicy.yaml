@@ -1,4 +1,4 @@
-{{- if and .Values.provider (eq .Values.provider "capz") -}}
+{{- if .Capabilities.APIVersions.Has "cilium.io/v2/CiliumLocalRedirectPolicy" -}}
 apiVersion: cilium.io/v2
 kind: CiliumLocalRedirectPolicy
 metadata:
