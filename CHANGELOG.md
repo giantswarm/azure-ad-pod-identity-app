@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.14.0] - 2023-05-02
+
 ### Changed
 
 - Enable support for cilium `kube proxy replacement` by creating a Local Redirect policy to replace iptables rule
@@ -135,7 +137,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.13.0...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.12.0...v0.13.0
 [0.12.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.10.4...v0.11.0
