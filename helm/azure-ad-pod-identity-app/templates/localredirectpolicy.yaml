@@ -1,0 +1,25 @@
+{{- if .Capabilities.APIVersions.Has "cilium.io/v2/CiliumLocalRedirectPolicy" -}}
+apiVersion: cilium.io/v2
+kind: CiliumLocalRedirectPolicy
+metadata:
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: nmi
+  name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  redirectBackend:
+    localEndpointSelector:
+      matchLabels:
+        {{- include "aad-pod-identity.selectors" . | nindent 8 }}
+        app.kubernetes.io/component: nmi
+    toPorts:
+    - port: "2579"
+      protocol: TCP
+  redirectFrontend:
+    addressMatcher:
+      ip: 169.254.169.254
+      toPorts:
+      - port: "80"
+        protocol: TCP
+{{- end }}
