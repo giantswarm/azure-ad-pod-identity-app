@@ -120,6 +120,8 @@ spec:
           value: "{{ .Values.forceNamespaced }}"
         {{- end }}
         securityContext:
+          seccompProfile:
+            type: RuntimeDefault
           runAsUser: 0
           capabilities:
             drop:
