@@ -46,4 +46,4 @@ spec:
         namespaces:
         - {{ $.Release.Namespace }}
         names:
-        - {{ template "aad-pod-identity.nmi.fullname" . }}
+        - {{ template "aad-pod-identity.nmi.fullname" . }}*
