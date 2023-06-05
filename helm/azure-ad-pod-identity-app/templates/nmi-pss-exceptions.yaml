@@ -37,6 +37,10 @@ spec:
     ruleNames:
     - restricted-volumes
     - autogen-restricted-volumes
+  - policyName: restrict-seccomp-strict
+    ruleNames:
+    - check-seccomp-strict
+    - autogen-check-seccomp-strict
   match:
     any:
     - resources:
