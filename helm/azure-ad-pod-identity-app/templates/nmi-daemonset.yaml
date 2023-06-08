@@ -28,6 +28,9 @@ spec:
       {{- if .Values.rbac.enabled }}
       serviceAccountName: {{ template "aad-pod-identity.nmi.fullname" . }}
       {{- end }}
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       {{- if .Values.nmi.priorityClassName }}
