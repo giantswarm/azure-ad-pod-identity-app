@@ -42,6 +42,7 @@ spec:
     - resources:
         kinds:
         - DaemonSet
+        - ReplicaSet
         - Pod
         namespaces:
         - {{ $.Release.Namespace }}
