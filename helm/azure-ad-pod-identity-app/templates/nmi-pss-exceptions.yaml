@@ -17,6 +17,8 @@ spec:
     ruleNames:
     - require-drop-all 
     - autogen-require-drop-all
+    - adding-capabilities-strict
+    - autogen-adding-capabilities-strict
   - policyName: disallow-privilege-escalation
     ruleNames:
     - privilege-escalation 
