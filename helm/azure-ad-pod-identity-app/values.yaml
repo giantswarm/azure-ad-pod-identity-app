@@ -262,3 +262,7 @@ exceptions: []
 #   - kube-system
 #   podLabels:
 #     ad-pod-identity: skip
+
+global:
+  podSecurityStandards:
+    enforced: false
