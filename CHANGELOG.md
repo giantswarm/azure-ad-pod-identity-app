@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.15.1] - 2024-01-22
+
 ### Added
 
 - Add `global.podSecurityStandards.enforced` value for PSS migration.
@@ -148,7 +150,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.0...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.1...HEAD
+[0.15.1]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.0...v0.15.1
 [0.15.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.12.0...v0.13.0
