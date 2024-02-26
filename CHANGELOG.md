@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Allow users to specify AzurePodIdentityException names.
+  
 ## [0.15.1] - 2024-01-22
 
 ### Added

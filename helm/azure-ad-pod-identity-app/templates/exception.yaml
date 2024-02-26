@@ -4,7 +4,7 @@
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzurePodIdentityException
 metadata:
-  name: ad-id-exc-{{ . }}
+  name: {{ if $exception.name }}{{ $exception.name }}{{ else }}ad-id-exc-{{ . }}{{ end }}
   namespace: {{ . }}
 spec:
   podLabels:
