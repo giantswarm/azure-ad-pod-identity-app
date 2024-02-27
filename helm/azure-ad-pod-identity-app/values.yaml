@@ -258,7 +258,8 @@ customUserAgent: ""
 
 # AzurePodIdentityException CRs to be created to make azure-ad-pod-identity ignore some pods.
 exceptions: []
-# - namespaces:
+# - name: exception-name
+#   namespaces:
 #   - kube-system
 #   podLabels:
 #     ad-pod-identity: skip
