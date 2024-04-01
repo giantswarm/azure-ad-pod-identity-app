@@ -1,4 +1,3 @@
-{{- if eq .Values.operationMode "standard" }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -14,4 +13,3 @@ spec:
     matchLabels:
       {{- include "aad-pod-identity.selectors" . | nindent 6 }}
       app.kubernetes.io/component: nmi
-{{- end }}
