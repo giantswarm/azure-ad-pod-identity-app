@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.15.3] - 2024-04-02
+
 ### Changed
 
 - Use ServiceMonitors for monitoring.
@@ -160,7 +162,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.2...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.3...HEAD
+[0.15.3]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.2...v0.15.3
 [0.15.2]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.1...v0.15.2
 [0.15.1]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.0...v0.15.1
 [0.15.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.14.0...v0.15.0
