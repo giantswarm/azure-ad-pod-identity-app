@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "aad-pod-identity.nmi.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "aad-pod-identity.labels" . | nindent 4 }}
+    app.kubernetes.io/component: nmi
+spec:
+  endpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      {{- include "aad-pod-identity.selectors" . | nindent 6 }}
+      app.kubernetes.io/component: nmi

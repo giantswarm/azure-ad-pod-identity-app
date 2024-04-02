@@ -4,15 +4,9 @@ kind: Service
 metadata:
   name: {{ template "aad-pod-identity.mic.fullname" . }}
   namespace: {{ $.Release.Namespace }}
-  annotations:
-    giantswarm.io/monitoring-path: /metrics
-    giantswarm.io/monitoring-port: {{ .Values.mic.prometheusPort | quote }}
-    prometheus.io/scrape: "true"
-    prometheus.io/port: {{ .Values.mic.prometheusPort | quote }}
   labels:
     {{- include "aad-pod-identity.labels" . | nindent 4 }}
     app.kubernetes.io/component: mic
-    giantswarm.io/monitoring: "true"
 spec:
   selector:
     {{- include "aad-pod-identity.selectors" . | nindent 4 }}
