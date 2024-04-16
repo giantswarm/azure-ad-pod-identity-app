@@ -76,9 +76,21 @@ mic:
   nodeSelector:
     kubernetes.io/os: linux
 
-  tolerations: []
+  tolerations: 
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+  - effect: NoSchedule
+    key: "node.cluster.x-k8s.io/uninitialized"
+    operator: "Exists"
 
-  affinity: {}
+  affinity: 
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - preference:
+          matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+        weight: 10
 
   # Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
   # ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
