@@ -56,7 +56,7 @@ mic:
   # Contains optional horizontal-pod-autoscaler (hpa) settings
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 3
     maxReplicas: 10
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 80
