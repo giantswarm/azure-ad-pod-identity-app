@@ -7,6 +7,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Bump `apiVersion` for Kyverno PolicyExceptions from `v2alpha1` to `v2beta1`.
+
+### Fixed
+
+- Fixed liveness probe configuration by explicitly exposing probe ports in NMI daemonset and MIC deployment.
+
 ## [0.15.4] - 2024-07-29
 
 ### Changed
@@ -29,7 +37,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Allow users to specify AzurePodIdentityException names.
-  
+
 ## [0.15.1] - 2024-01-22
 
 ### Added
