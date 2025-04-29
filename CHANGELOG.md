@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.16.0] - 2025-04-29
+
 ### Changed
 
 - Bump `apiVersion` for Kyverno PolicyExceptions from `v2alpha1` to `v2beta1`.
@@ -181,7 +183,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add first version of the Azure AD Pod Identity App.
 
-[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.4...HEAD
+[Unreleased]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.16.0...HEAD
+[0.16.0]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.4...v0.16.0
 [0.15.4]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.3...v0.15.4
 [0.15.3]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.2...v0.15.3
 [0.15.2]: https://github.com/giantswarm/azure-ad-pod-identity-app/compare/v0.15.1...v0.15.2
