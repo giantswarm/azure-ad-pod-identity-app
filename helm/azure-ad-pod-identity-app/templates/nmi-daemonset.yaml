@@ -133,6 +133,13 @@ spec:
             - DAC_READ_SEARCH
             - NET_ADMIN
             - NET_RAW
+        ports:
+          - containerPort: {{ .Values.nmi.prometheusPort }}
+            name: metrics
+            protocol: TCP
+          - containerPort: {{ .Values.nmi.probePort | default 8080 }}
+            name: probe
+            protocol: TCP
         volumeMounts:
         - name: iptableslock
           mountPath: /run/xtables.lock

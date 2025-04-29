@@ -175,6 +175,9 @@ spec:
           - containerPort: {{ .Values.mic.prometheusPort }}
             name: metrics
             protocol: TCP
+          - containerPort: {{ .Values.mic.probePort | default 8080 }}
+            name: probe
+            protocol: TCP
         {{- end }}
         {{- if not .Values.adminsecret }}
         volumeMounts:

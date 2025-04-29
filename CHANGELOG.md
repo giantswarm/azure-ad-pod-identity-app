@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Bump `apiVersion` for Kyverno PolicyExceptions from `v2alpha1` to `v2beta1`.
 
+### Fixed
+
+- Fixed liveness probe configuration by explicitly exposing probe ports in NMI daemonset and MIC deployment.
+
 ## [0.15.4] - 2024-07-29
 
 ### Changed
