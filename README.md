@@ -20,9 +20,9 @@ Using Kubernetes primitives, administrators configure identities and bindings to
 
 - [Azure AD Pod Identity App](#azure-ad-pod-identity-app)
 - [Installing](#installing)
+  - [Required parameters](#required-parameters)
   - [Sample values files for the web interface and API](#sample-values-files-for-the-web-interface-and-api)
   - [Sample App CR and ConfigMap for the Control Plane](#sample-app-cr-and-configmap-for-the-control-plane)
-  - [Important note about required cluster level config](#important-note-about-required-cluster-level-config)
 - [Configuration Options](#configuration-options)
 - [Limitations](#limitations)
 - [For developers](#for-developers)
@@ -32,11 +32,10 @@ Using Kubernetes primitives, administrators configure identities and bindings to
 
 ## Installing
 
-There are 3 ways to install this app onto a tenant cluster.
+There are 2 ways to install this app onto a workload cluster.
 
-1. [Using our web interface](https://docs.giantswarm.io/reference/web-interface/app-catalog/)
-2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
-3. Directly creating the App custom resource on the Control Plane.
+1. [Using GitOps to instantiate the App](https://docs.giantswarm.io/tutorials/continuous-deployment/apps/add-appcr/)
+2. Directly creating the App custom resource on the management cluster, as explained in [Getting started with App Platform](https://docs.giantswarm.io/tutorials/fleet-management/app-platform/).
 
 ### Required parameters
 
@@ -147,7 +146,7 @@ If you place these files in a folder called `foldername`, you could use the
 command: `kubectl apply foldername`, to deploy this app to a tenant cluster
 with id `abc12`.
 
-See our [full reference page on how to configure applications](https://docs.giantswarm.io/reference/app-configuration/) for more details.
+See our [full reference page on how to configure applications](https://docs.giantswarm.io/tutorials/fleet-management/app-platform/app-configuration/) for more details.
 
 ## Configuration Options
 
@@ -201,4 +200,4 @@ It is available as an `App` in the `giantswarm-playground-catalog` and `giantswa
 [giantswarm-playground-catalog]: https://github.com/giantswarm/giantswarm-playground-catalog
 [giantswarm-playground-test-catalog]: https://github.com/giantswarm/giantswarm-playground-test-catalog
 [Azure AD Pod Identity]: https://github.com/Azure/aad-pod-identity
-[Giant Swarm App Platform]: https://docs.giantswarm.io/basics/app-catalog/
+[Giant Swarm App Platform]: https://docs.giantswarm.io/overview/fleet-management/app-management/
