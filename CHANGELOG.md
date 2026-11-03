@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Fixed
 
 - Fix the README table of contents: remove the entry for a section that does not exist and add the missing `Required parameters` entry.
+- Fix broken docs links in the README: replace the retired web interface and API install options with GitOps and App CR instructions, and point the app configuration and App Platform links to their current docs locations.
 
 ## [0.16.1] - 2025-08-29
 
