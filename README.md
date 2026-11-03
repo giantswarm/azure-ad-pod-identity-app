@@ -20,9 +20,9 @@ Using Kubernetes primitives, administrators configure identities and bindings to
 
 - [Azure AD Pod Identity App](#azure-ad-pod-identity-app)
 - [Installing](#installing)
+  - [Required parameters](#required-parameters)
   - [Sample values files for the web interface and API](#sample-values-files-for-the-web-interface-and-api)
   - [Sample App CR and ConfigMap for the Control Plane](#sample-app-cr-and-configmap-for-the-control-plane)
-  - [Important note about required cluster level config](#important-note-about-required-cluster-level-config)
 - [Configuration Options](#configuration-options)
 - [Limitations](#limitations)
 - [For developers](#for-developers)

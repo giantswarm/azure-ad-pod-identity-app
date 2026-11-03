@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix the README table of contents: remove the entry for a section that does not exist and add the missing `Required parameters` entry.
+
 ## [0.16.1] - 2025-08-29
 
 ### Changed
