@@ -1,8 +1,11 @@
+{{- if and .Values.kyvernoPolicyExceptions.enabled .Values.kyvernoPolicyExceptions.legacy.enabled }}
 apiVersion: kyverno.io/v2
 kind: PolicyException
 metadata:
   name: {{ template "aad-pod-identity.nmi.fullname" . }}-exceptions
-  namespace: {{ $.Release.Namespace }}
+  namespace: giantswarm
+  labels:
+    policy.giantswarm.io/migrated-to-cel: "true"
 spec:
   exceptions:
   - policyName: disallow-capabilities 
@@ -50,3 +53,4 @@ spec:
         - {{ $.Release.Namespace }}
         names:
         - {{ template "aad-pod-identity.nmi.fullname" . }}*
+{{- end }}
