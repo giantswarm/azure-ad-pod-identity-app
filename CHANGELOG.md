@@ -15,7 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Move the PolicyException to the `giantswarm` namespace.
+- Move the PolicyException to the `kube-system` namespace.
 
 ### Fixed
 

@@ -3,7 +3,7 @@ apiVersion: policies.kyverno.io/v1
 kind: PolicyException
 metadata:
   name: {{ template "aad-pod-identity.nmi.fullname" . }}-exceptions
-  namespace: giantswarm
+  namespace: kube-system
   annotations:
     "helm.sh/hook": "pre-install,pre-upgrade"
 spec:

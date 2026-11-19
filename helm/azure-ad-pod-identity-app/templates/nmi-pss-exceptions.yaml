@@ -3,7 +3,7 @@ apiVersion: kyverno.io/v2
 kind: PolicyException
 metadata:
   name: {{ template "aad-pod-identity.nmi.fullname" . }}-exceptions
-  namespace: giantswarm
+  namespace: kube-system
   labels:
     policy.giantswarm.io/migrated-to-cel: "true"
 spec:
